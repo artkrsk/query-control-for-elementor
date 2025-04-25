@@ -1,0 +1,13 @@
+*[class*="elementor-control-type-arts-query-control-for-elementor"]
+	.select2-container--default
+		.select2-selection--multiple
+			.ui-sortable
+				.select2-selection__choice
+					cursor: move
+	.select2-container--disabled
+		opacity: .75
+
+.arts-query-control-for-elementor-dropdown
+	.select2-results:has(.select2-results__option:not(.loading-results))
+		.select2-results__option.loading-results
+			display: none

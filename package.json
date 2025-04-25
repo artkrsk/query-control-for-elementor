@@ -1,0 +1,50 @@
+{
+  "name": "@arts/query-control-for-elementor",
+  "author": "Artem Semkin",
+  "version": "1.0.0",
+  "type": "module",
+  "license": "MIT",
+  "description": "Query Control for Elementor",
+  "private": true,
+  "sideEffects": false,
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "engines": {
+    "node": ">=23.0.0"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@eslint/js": "^9.25.1",
+    "@types/node": "^22.14.1",
+    "@vitest/coverage-v8": "^3.1.2",
+    "@vitest/ui": "3.1.2",
+    "cypress": "^14.3.2",
+    "depcheck": "^1.4.7",
+    "eslint": "^9.25.1",
+    "eslint-config-prettier": "^10.1.2",
+    "jsdom": "^26.1.0",
+    "npm-check-updates": "^18.0.1",
+    "prettier": "^3.5.3",
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.31.0",
+    "vitest": "^3.1.2"
+  },
+  "scripts": {
+    "dev": "node __build__/src/index.js dev",
+    "build": "node __build__/src/index.js build",
+    "deps:check": "npx npm-check-updates",
+    "deps:update": "npx npm-check-updates -u && npm install",
+    "format": "prettier --write 'src/js/**/*.{js,jsx,json,css,ts,tsx}'",
+    "format:check": "prettier --check 'src/js/**/*.{js,jsx,json,css,ts,tsx}'",
+    "lint": "eslint 'src/js/**/*.{js,ts,jsx,tsx}'",
+    "lint:fix": "eslint --fix 'src/js/**/*.{js,ts,jsx,tsx}'",
+    "test": "vitest",
+    "test:watch": "vitest watch",
+    "test:coverage": "vitest run --coverage",
+    "test:ui": "vitest --ui"
+  }
+}

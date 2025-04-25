@@ -1,0 +1,126 @@
+# Copyright (C) 2025 Arts Query Control for Elementor
+# This file is distributed under the same license as the Arts Query Control for Elementor package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Arts Query Control for Elementor\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language-Team: Artem Semkin\n"
+"Last-Translator: Artem Semkin\n"
+"POT-Creation-Date: 2025-04-30T06:54:03.034Z"
+"Report-Msgid-Bugs-To: https://artemsemkin.com\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: src/php/Base/QueryControl.php:151, src/php/Base/QueryControl.php:173, src/php/Controls/QueryMenusSelect.php:85, src/php/Controls/QueryMenusSelect.php:106, src/php/Controls/QueryPostsSelect.php:81, src/php/Controls/QueryPostsSelect.php:123, src/php/Controls/QueryPostTypesSelect.php:112, src/php/Controls/QueryPostTypesSelect.php:133, src/php/Controls/QueryTermsSelect.php:81, src/php/Controls/QueryTermsSelect.php:130
+msgid "Access denied."
+msgstr ""
+
+#: src/php/Base/QueryControl.php:196, src/php/Controls/QueryPostsSelect.php:174, src/php/Controls/QueryTermsSelect.php:85
+msgid "Empty or incomplete data"
+msgstr ""
+
+#: src/php/Controls/QueryGroup.php:116
+msgid "Data Source"
+msgstr ""
+
+#: src/php/Controls/QueryGroup.php:120
+msgid "Dynamic Posts"
+msgstr ""
+
+#: src/php/Controls/QueryGroup.php:121
+msgid "Custom Content"
+msgstr ""
+
+#: src/php/Controls/QueryGroup.php:194
+msgid "All"
+msgstr ""
+
+#: src/php/Controls/QueryGroup.php:195, src/php/Controls/QueryGroup.php:624, src/php/Controls/QueryGroup.php:634
+msgid "Include"
+msgstr ""
+
+#: src/php/Controls/QueryGroup.php:196, src/php/Controls/QueryGroup.php:629, src/php/Controls/QueryGroup.php:639
+msgid "Exclude"
+msgstr ""
+
+#: src/php/Controls/QueryGroup.php:275
+msgid "Auto"
+msgstr ""
+
+#: src/php/Controls/QueryGroup.php:276
+msgid "Date"
+msgstr ""
+
+#: src/php/Controls/QueryGroup.php:277, src/php/Controls/QueryGroup.php:589
+msgid "Title"
+msgstr ""
+
+#: src/php/Controls/QueryGroup.php:306
+msgid "Ascending"
+msgstr ""
+
+#: src/php/Controls/QueryGroup.php:307
+msgid "Descending"
+msgstr ""
+
+#: src/php/Controls/QueryGroup.php:359
+msgid "Prefer Default Featured Image"
+msgstr ""
+
+#: src/php/Controls/QueryGroup.php:360
+msgid "Prefer Secondary Featured Image"
+msgstr ""
+
+#: src/php/Controls/QueryGroup.php:403
+msgid "Items"
+msgstr ""
+
+#: src/php/Controls/QueryGroup.php:437
+msgid "Item..."
+msgstr ""
+
+#: src/php/Controls/QueryGroup.php:590
+msgid "Link"
+msgstr ""
+
+#: src/php/Controls/QueryGroup.php:591
+msgid "Image"
+msgstr ""
+
+#: src/php/Controls/QueryGroup.php:620
+msgid "Post Type"
+msgstr ""
+
+#: src/php/Controls/QueryGroup.php:621
+msgid "Query Posts"
+msgstr ""
+
+#: src/php/Controls/QueryGroup.php:625, src/php/Controls/QueryGroup.php:630
+msgid "by Terms"
+msgstr ""
+
+#: src/php/Controls/QueryGroup.php:635, src/php/Controls/QueryGroup.php:640
+msgid "Posts"
+msgstr ""
+
+#: src/php/Controls/QueryGroup.php:642
+msgid "Order By"
+msgstr ""
+
+#: src/php/Controls/QueryGroup.php:643
+msgid "Please note that the \"Order By\" option is ignored once you select individual posts to include. Use drag & drop sorting in the \"Include Posts\" field instead."
+msgstr ""
+
+#: src/php/Controls/QueryGroup.php:644
+msgid "Order"
+msgstr ""
+
+#: src/php/Controls/QueryGroup.php:645
+msgid "Limit Posts for Display (0 for no limit)"
+msgstr ""

@@ -1,0 +1,19 @@
+{
+  "name": "arts/query-control-for-elementor",
+  "type": "library",
+  "autoload": {
+    "psr-4": {
+      "Arts\\QueryControl\\": "src/php/"
+    }
+  },
+  "authors": [
+    {
+      "name": "Artem Semkin",
+      "email": "me@artemsemkin.com"
+    }
+  ],
+  "require": {
+    "arts/utilities": "@dev",
+    "arts/elementor-extension": "@dev"
+  }
+}

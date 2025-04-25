@@ -1,0 +1,116 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "2b11abafbd913070adc68e9a7ff71fab",
+    "packages": [
+        {
+            "name": "arts/elementor-extension",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/artkrsk/arts-elementor-extension.git",
+                "reference": "b2f7cf3e3035283793d83e3cfa878dcb22e25c4c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/artkrsk/arts-elementor-extension/zipball/b2f7cf3e3035283793d83e3cfa878dcb22e25c4c",
+                "reference": "b2f7cf3e3035283793d83e3cfa878dcb22e25c4c",
+                "shasum": ""
+            },
+            "require": {
+                "arts/utilities": "*",
+                "php": ">=7.4"
+            },
+            "require-dev": {
+                "brain/monkey": "^2.6",
+                "phpunit/phpunit": "^9.6",
+                "yoast/phpunit-polyfills": "^4.0"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Arts\\ElementorExtension\\": "src/php/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Artem Semkin",
+                    "email": "me@artemsemkin.com"
+                }
+            ],
+            "description": "WordPress library",
+            "support": {
+                "issues": "https://github.com/artkrsk/arts-elementor-extension/issues",
+                "source": "https://github.com/artkrsk/arts-elementor-extension/tree/v1.0.1"
+            },
+            "time": "2025-04-28T13:23:51+00:00"
+        },
+        {
+            "name": "arts/utilities",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/artkrsk/arts-utilities.git",
+                "reference": "282313d41a292caa3ae623a9c5ff5fb6485f3669"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/artkrsk/arts-utilities/zipball/282313d41a292caa3ae623a9c5ff5fb6485f3669",
+                "reference": "282313d41a292caa3ae623a9c5ff5fb6485f3669",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2"
+            },
+            "require-dev": {
+                "antecedent/patchwork": "^2.1",
+                "brain/monkey": "^2.6",
+                "phpunit/phpunit": "^9.6",
+                "yoast/phpunit-polyfills": "^4.0"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Arts\\Utilities\\": "src/php/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Artem Semkin",
+                    "email": "me@artemsemkin.com"
+                }
+            ],
+            "description": "A comprehensive collection of utility methods for WordPress theme and plugin development, with a focus on Elementor integration.",
+            "support": {
+                "issues": "https://github.com/artkrsk/arts-utilities/issues",
+                "source": "https://github.com/artkrsk/arts-utilities/tree/master"
+            },
+            "time": "2025-04-25T02:46:13+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": {
+        "arts/utilities": 20,
+        "arts/elementor-extension": 20
+    },
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": [],
+    "plugin-api-version": "2.6.0"
+}
