@@ -199,7 +199,7 @@ class QueryPostTypesSelect extends QueryControl {
 		}
 
 		$args = apply_filters(
-			'arts/query_control_for_elementor/post_types/query_args',
+			'arts/query_control/post_types/query_args',
 			array(
 				'public'   => true,
 				'_builtin' => false,
@@ -207,7 +207,7 @@ class QueryPostTypesSelect extends QueryControl {
 		);
 
 		$exclude_types = apply_filters(
-			'arts/query_control_for_elementor/post_types/exclude',
+			'arts/query_control/post_types/exclude',
 			array(
 				'e-landing-page',
 				'elementor_library',
@@ -217,7 +217,7 @@ class QueryPostTypesSelect extends QueryControl {
 		);
 
 		$include_types = apply_filters(
-			'arts/query_control_for_elementor/post_types/include',
+			'arts/query_control/post_types/include',
 			array(
 				'page',
 				'post',

@@ -162,10 +162,10 @@ class QueryGroup extends Group_Control_Base {
 	 */
 	private function get_dynamic_fields_controls() {
 		$group_name = $this->get_controls_prefix();
-		$group_name = apply_filters( 'arts/query_control_for_elementor/group_control/dynamic_fields_controls/group_name', $group_name, $this );
+		$group_name = apply_filters( 'arts/query_control/group_control/dynamic_fields_controls/group_name', $group_name, $this );
 
 		$is_archive = Utilities::is_archive();
-		$is_archive = apply_filters( 'arts/query_control_for_elementor/group_control/dynamic_fields_controls/condition_is_archive', $is_archive, $this );
+		$is_archive = apply_filters( 'arts/query_control/group_control/dynamic_fields_controls/condition_is_archive', $is_archive, $this );
 
 		$fields_set = $this->get_dynamic_fields_controls_default_set();
 
@@ -569,7 +569,7 @@ class QueryGroup extends Group_Control_Base {
 		 * @param Repeater $repeater The Elementor repeater instance.
 		 * @param QueryGroup $this The current QueryGroup instance.
 		 */
-		do_action( 'arts/query_control_for_elementor/group_control/static_fields_controls/repeater', $repeater, $this );
+		do_action( 'arts/query_control/group_control/static_fields_controls/repeater', $repeater, $this );
 
 		return $repeater->get_controls();
 	}
@@ -600,7 +600,7 @@ class QueryGroup extends Group_Control_Base {
 		 *
 		 * @param array $fields_set The default set of static field controls.
 		 */
-		$fields_set = apply_filters( 'arts/query_control_for_elementor/group_control/static_fields_controls/default_set', $fields_set );
+		$fields_set = apply_filters( 'arts/query_control/group_control/static_fields_controls/default_set', $fields_set );
 
 		return $fields_set;
 	}
@@ -654,7 +654,7 @@ class QueryGroup extends Group_Control_Base {
 		 *
 		 * @param array $fields_set The default set of dynamic field controls.
 		 */
-		$fields_set = apply_filters( 'arts/query_control_for_elementor/group_control/dynamic_fields_controls/default_set', $fields_set );
+		$fields_set = apply_filters( 'arts/query_control/group_control/dynamic_fields_controls/default_set', $fields_set );
 
 		return $fields_set;
 	}

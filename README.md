@@ -232,63 +232,63 @@ You can customize the behavior and appearance of the controls using the followin
 
 ### Filters
 
-- `arts/query_control_for_elementor/group_control/static_fields_controls/default_set`
+- `arts/query_control/group_control/static_fields_controls/default_set`
 
   - **Description:** Modifies the default fields available in the static content repeater within the Query Group control.
   - **Parameters:** `$fields_set` (array) - The default set of static field controls (e.g., `['title' => 'Title', 'link' => 'Link', 'image' => 'Image']`).
   - **Example:** Add a 'subtitle' field.
     ```php
-    add_filter( 'arts/query_control_for_elementor/group_control/static_fields_controls/default_set', function( $fields_set ) {
+    add_filter( 'arts/query_control/group_control/static_fields_controls/default_set', function( $fields_set ) {
         $fields_set['subtitle'] = esc_html__( 'Subtitle', 'my-text-domain' );
         return $fields_set;
     } );
     ```
 
-- `arts/query_control_for_elementor/group_control/dynamic_fields_controls/default_set`
+- `arts/query_control/group_control/dynamic_fields_controls/default_set`
 
   - **Description:** Modifies the default fields available for dynamic content selection within the Query Group control.
   - **Parameters:** `$fields_set` (array) - The default set of dynamic field controls (e.g., `post_type`, `posts_query`, `include_terms`, etc.).
   - **Example:** Remove the 'Order By' field.
     ```php
-    add_filter( 'arts/query_control_for_elementor/group_control/dynamic_fields_controls/default_set', function( $fields_set ) {
+    add_filter( 'arts/query_control/group_control/dynamic_fields_controls/default_set', function( $fields_set ) {
         unset( $fields_set['order_by'] );
         unset( $fields_set['order_by_notice'] );
         return $fields_set;
     } );
     ```
 
-- `arts/query_control_for_elementor/group_control/dynamic_fields_controls/group_name`
+- `arts/query_control/group_control/dynamic_fields_controls/group_name`
 
   - **Description:** Filters the group name (prefix) used for dynamic field controls within the Query Group.
   - **Parameters:** `$group_name` (string), `$query_group_instance` (QueryGroup).
 
-- `arts/query_control_for_elementor/group_control/dynamic_fields_controls/condition_is_archive`
+- `arts/query_control/group_control/dynamic_fields_controls/condition_is_archive`
 
   - **Description:** Filters the boolean value indicating if the current context is an archive page, affecting conditional display of some dynamic fields.
   - **Parameters:** `$is_archive` (bool), `$query_group_instance` (QueryGroup).
 
-- `arts/query_control_for_elementor/post_types/query_args`
+- `arts/query_control/post_types/query_args`
 
   - **Description:** Modifies the query arguments used to fetch post types for the `QueryPostTypesSelect` control.
   - **Parameters:** `$args` (array) - Arguments passed to `get_post_types()`. Default: `['public' => true, '_builtin' => false]`.
 
-- `arts/query_control_for_elementor/post_types/exclude`
+- `arts/query_control/post_types/exclude`
 
   - **Description:** Modifies the list of post types explicitly excluded from the `QueryPostTypesSelect` control.
   - **Parameters:** `$exclude_types` (array) - Array of post type slugs to exclude.
 
-- `arts/query_control_for_elementor/post_types/include`
+- `arts/query_control/post_types/include`
   - **Description:** Modifies the list of post types explicitly included in the `QueryPostTypesSelect` control (these are added in addition to those fetched by `query_args`).
   - **Parameters:** `$include_types` (array) - Array of post type slugs to include.
 
 ### Actions
 
-- `arts/query_control_for_elementor/group_control/static_fields_controls/repeater`
+- `arts/query_control/group_control/static_fields_controls/repeater`
   - **Description:** Allows adding custom controls to the repeater used for static content items within the Query Group control.
   - **Parameters:** `$repeater` (\Elementor\Repeater) - The Elementor repeater instance., `$query_group_instance` (QueryGroup) - The current QueryGroup instance.
   - **Example:** Add a 'subtitle' text control to the static items repeater.
     ```php
-    add_action( 'arts/query_control_for_elementor/group_control/static_fields_controls/repeater', function( $repeater, $query_group_instance ) {
+    add_action( 'arts/query_control/group_control/static_fields_controls/repeater', function( $repeater, $query_group_instance ) {
         $repeater->add_control(
             'subtitle',
             [

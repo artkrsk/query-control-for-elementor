@@ -263,7 +263,7 @@ class Plugin extends BasePlugin {
 		 *
 		 * @param array $query_args The query arguments for fetching posts.
 		 */
-		$query_args = apply_filters( 'arts/query_control_for_elementor/query_args', $query_args );
+		$query_args = apply_filters( 'arts/query_control/query_args', $query_args );
 
 		return $query_args;
 	}
