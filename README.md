@@ -1,5 +1,11 @@
 # Arts Query Control for Elementor
 
+![License](https://img.shields.io/badge/license-MIT-blue)
+![WordPress](https://img.shields.io/badge/wordpress-6.0%2B-green)
+![PHP](https://img.shields.io/badge/php-7.4%2B-purple)
+![Elementor](https://img.shields.io/badge/elementor-compatible-red)
+[![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-ffdd00?style=flat&logo=buy-me-a-coffee&logoColor=black)](https://buymeacoffee.com/artemsemkin)
+
 A development extension providing advanced query controls for Elementor page builder widgets.
 
 ## Setup
@@ -294,3 +300,17 @@ You can customize the behavior and appearance of the controls using the followin
         );
     }, 10, 2 );
     ```
+
+## 📜 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 💖 Support
+
+If you find this plugin useful, consider buying me a coffee:
+
+<a href="https://buymeacoffee.com/artemsemkin" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
+
+---
+
+Made with ❤️ by [Artem Semkin](https://artemsemkin.com)
