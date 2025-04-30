@@ -1,6 +1,7 @@
 {
   "name": "arts/query-control-for-elementor",
   "type": "library",
+  "license": "MIT",
   "autoload": {
     "psr-4": {
       "Arts\\QueryControl\\": "src/php/"
