@@ -211,6 +211,8 @@ class Plugin extends BasePlugin {
 				'paged',
 				'cat',
 				's',
+				'tag_id',
+				'tag',
 			);
 
 			foreach ( $sync_global_query_vars as $var ) {
