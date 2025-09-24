@@ -5,7 +5,10 @@
   "autoload": {
     "psr-4": {
       "Arts\\QueryControl\\": "src/php/"
-    }
+    },
+    "files": [
+      "src/php/autoload.php"
+    ]
   },
   "authors": [
     {
