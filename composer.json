@@ -2,6 +2,22 @@
   "name": "arts/query-control-for-elementor",
   "type": "library",
   "license": "MIT",
+  "repositories": [
+    {
+      "type": "path",
+      "url": "/Users/art/Projects/Framework/packages/ArtsUtilities",
+      "options": {
+        "symlink": true
+      }
+    },
+    {
+      "type": "path",
+      "url": "/Users/art/Projects/Framework/packages/ArtsElementorExtension",
+      "options": {
+        "symlink": true
+      }
+    }
+  ],
   "autoload": {
     "psr-4": {
       "Arts\\QueryControl\\": "src/php/"

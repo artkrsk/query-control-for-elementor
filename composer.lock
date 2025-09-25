@@ -4,21 +4,15 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2b11abafbd913070adc68e9a7ff71fab",
+    "content-hash": "06a843ea0c2454ee79da5f1d7dde5727",
     "packages": [
         {
             "name": "arts/elementor-extension",
             "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/artkrsk/arts-elementor-extension.git",
-                "reference": "5a93086991f24a0ea4585d33231e594d4c231f3a"
-            },
             "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/artkrsk/arts-elementor-extension/zipball/5a93086991f24a0ea4585d33231e594d4c231f3a",
-                "reference": "5a93086991f24a0ea4585d33231e594d4c231f3a",
-                "shasum": ""
+                "type": "path",
+                "url": "/Users/art/Projects/Framework/packages/ArtsElementorExtension",
+                "reference": "8af067b472340b75c9934df37ccb3f9e17a64ed6"
             },
             "require": {
                 "arts/utilities": "@dev",
@@ -29,14 +23,12 @@
                 "phpunit/phpunit": "^9.6",
                 "yoast/phpunit-polyfills": "^4.0"
             },
-            "default-branch": true,
             "type": "library",
             "autoload": {
                 "psr-4": {
                     "Arts\\ElementorExtension\\": "src/php/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -47,25 +39,18 @@
                 }
             ],
             "description": "WordPress library",
-            "support": {
-                "issues": "https://github.com/artkrsk/arts-elementor-extension/issues",
-                "source": "https://github.com/artkrsk/arts-elementor-extension/tree/master"
-            },
-            "time": "2025-08-31T02:31:19+00:00"
+            "transport-options": {
+                "symlink": true,
+                "relative": false
+            }
         },
         {
             "name": "arts/utilities",
             "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/artkrsk/arts-utilities.git",
-                "reference": "6cd4308a826cb07a793bd548cf76faa608ea00fc"
-            },
             "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/artkrsk/arts-utilities/zipball/6cd4308a826cb07a793bd548cf76faa608ea00fc",
-                "reference": "6cd4308a826cb07a793bd548cf76faa608ea00fc",
-                "shasum": ""
+                "type": "path",
+                "url": "/Users/art/Projects/Framework/packages/ArtsUtilities",
+                "reference": "c3c3faa67f3bd77fe3a1ff3d8f60de0b05581bc8"
             },
             "require": {
                 "php": ">=7.2"
@@ -76,14 +61,17 @@
                 "phpunit/phpunit": "^9.6",
                 "yoast/phpunit-polyfills": "^4.0"
             },
-            "default-branch": true,
             "type": "library",
             "autoload": {
                 "psr-4": {
                     "Arts\\Utilities\\": "src/php/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "autoload-dev": {
+                "psr-4": {
+                    "Tests\\": "__tests__/php/"
+                }
+            },
             "license": [
                 "MIT"
             ],
@@ -94,11 +82,10 @@
                 }
             ],
             "description": "A comprehensive collection of utility methods for WordPress theme and plugin development, with a focus on Elementor integration.",
-            "support": {
-                "issues": "https://github.com/artkrsk/arts-utilities/issues",
-                "source": "https://github.com/artkrsk/arts-utilities/tree/v1.1.1"
-            },
-            "time": "2025-09-15T11:11:31+00:00"
+            "transport-options": {
+                "symlink": true,
+                "relative": false
+            }
         }
     ],
     "packages-dev": [],
