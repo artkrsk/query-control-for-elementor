@@ -275,6 +275,7 @@ class QueryGroup extends Group_Control_Base {
 					''           => esc_html__( 'Auto', 'arts-query-control-for-elementor' ),
 					'post_date'  => esc_html__( 'Date', 'arts-query-control-for-elementor' ),
 					'post_title' => esc_html__( 'Title', 'arts-query-control-for-elementor' ),
+					'rand'       => esc_html__( 'Random', 'arts-query-control-for-elementor' ),
 				),
 				'group'       => $group_name,
 				'condition'   => array(
@@ -290,9 +291,25 @@ class QueryGroup extends Group_Control_Base {
 				'raw'             => $fields_set['order_by_notice'],
 				'content_classes' => 'elementor-panel-alert elementor-panel-alert-warning',
 				'group'           => $group_name,
-				'condition'       => array(
-					'source'      => 'dynamic',
-					'posts_query' => 'include',
+				'conditions'      => array(
+					'relation' => 'and',
+					'terms'    => array(
+						array(
+							'name'     => 'source',
+							'operator' => '===',
+							'value'    => 'dynamic',
+						),
+						array(
+							'name'     => 'posts_query',
+							'operator' => '===',
+							'value'    => 'include',
+						),
+						array(
+							'name'     => 'include_ids',
+							'operator' => '!==',
+							'value'    => array(),
+						),
+					),
 				),
 			);
 		}
@@ -317,8 +334,8 @@ class QueryGroup extends Group_Control_Base {
 						),
 						array(
 							'name'     => 'order_by',
-							'operator' => '!==',
-							'value'    => '',
+							'operator' => '!in',
+							'value'    => array( '', 'rand' ),
 						),
 					),
 				),
