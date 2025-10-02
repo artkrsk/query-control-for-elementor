@@ -8,7 +8,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language-Team: Artem Semkin\n"
 "Last-Translator: Artem Semkin\n"
-"POT-Creation-Date: 2025-04-30T06:54:03.034Z"
+"POT-Creation-Date: 2025-10-02T08:50:38.709Z"
 "Report-Msgid-Bugs-To: https://artemsemkin.com\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
@@ -17,7 +17,7 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: src/php/Base/QueryControl.php:151, src/php/Base/QueryControl.php:173, src/php/Controls/QueryMenusSelect.php:85, src/php/Controls/QueryMenusSelect.php:106, src/php/Controls/QueryPostsSelect.php:81, src/php/Controls/QueryPostsSelect.php:123, src/php/Controls/QueryPostTypesSelect.php:112, src/php/Controls/QueryPostTypesSelect.php:133, src/php/Controls/QueryTermsSelect.php:81, src/php/Controls/QueryTermsSelect.php:130
+#: src/php/Base/QueryControl.php:151, src/php/Base/QueryControl.php:173, src/php/Controls/QueryMenusSelect.php:85, src/php/Controls/QueryMenusSelect.php:106, src/php/Controls/QueryPostsSelect.php:81, src/php/Controls/QueryPostsSelect.php:123, src/php/Controls/QueryPostTypesSelect.php:119, src/php/Controls/QueryPostTypesSelect.php:140, src/php/Controls/QueryTermsSelect.php:81, src/php/Controls/QueryTermsSelect.php:130
 msgid "Access denied."
 msgstr ""
 
@@ -41,11 +41,11 @@ msgstr ""
 msgid "All"
 msgstr ""
 
-#: src/php/Controls/QueryGroup.php:195, src/php/Controls/QueryGroup.php:624, src/php/Controls/QueryGroup.php:634
+#: src/php/Controls/QueryGroup.php:195, src/php/Controls/QueryGroup.php:641, src/php/Controls/QueryGroup.php:651
 msgid "Include"
 msgstr ""
 
-#: src/php/Controls/QueryGroup.php:196, src/php/Controls/QueryGroup.php:629, src/php/Controls/QueryGroup.php:639
+#: src/php/Controls/QueryGroup.php:196, src/php/Controls/QueryGroup.php:646, src/php/Controls/QueryGroup.php:656
 msgid "Exclude"
 msgstr ""
 
@@ -57,70 +57,74 @@ msgstr ""
 msgid "Date"
 msgstr ""
 
-#: src/php/Controls/QueryGroup.php:277, src/php/Controls/QueryGroup.php:589
+#: src/php/Controls/QueryGroup.php:277, src/php/Controls/QueryGroup.php:606
 msgid "Title"
 msgstr ""
 
-#: src/php/Controls/QueryGroup.php:306
+#: src/php/Controls/QueryGroup.php:278
+msgid "Random"
+msgstr ""
+
+#: src/php/Controls/QueryGroup.php:323
 msgid "Ascending"
 msgstr ""
 
-#: src/php/Controls/QueryGroup.php:307
+#: src/php/Controls/QueryGroup.php:324
 msgid "Descending"
 msgstr ""
 
-#: src/php/Controls/QueryGroup.php:359
+#: src/php/Controls/QueryGroup.php:376
 msgid "Prefer Default Featured Image"
 msgstr ""
 
-#: src/php/Controls/QueryGroup.php:360
+#: src/php/Controls/QueryGroup.php:377
 msgid "Prefer Secondary Featured Image"
 msgstr ""
 
-#: src/php/Controls/QueryGroup.php:403
+#: src/php/Controls/QueryGroup.php:420
 msgid "Items"
 msgstr ""
 
-#: src/php/Controls/QueryGroup.php:437
+#: src/php/Controls/QueryGroup.php:454
 msgid "Item..."
 msgstr ""
 
-#: src/php/Controls/QueryGroup.php:590
+#: src/php/Controls/QueryGroup.php:607
 msgid "Link"
 msgstr ""
 
-#: src/php/Controls/QueryGroup.php:591
+#: src/php/Controls/QueryGroup.php:608
 msgid "Image"
 msgstr ""
 
-#: src/php/Controls/QueryGroup.php:620
+#: src/php/Controls/QueryGroup.php:637
 msgid "Post Type"
 msgstr ""
 
-#: src/php/Controls/QueryGroup.php:621
+#: src/php/Controls/QueryGroup.php:638
 msgid "Query Posts"
 msgstr ""
 
-#: src/php/Controls/QueryGroup.php:625, src/php/Controls/QueryGroup.php:630
+#: src/php/Controls/QueryGroup.php:642, src/php/Controls/QueryGroup.php:647
 msgid "by Terms"
 msgstr ""
 
-#: src/php/Controls/QueryGroup.php:635, src/php/Controls/QueryGroup.php:640
+#: src/php/Controls/QueryGroup.php:652, src/php/Controls/QueryGroup.php:657
 msgid "Posts"
 msgstr ""
 
-#: src/php/Controls/QueryGroup.php:642
+#: src/php/Controls/QueryGroup.php:659
 msgid "Order By"
 msgstr ""
 
-#: src/php/Controls/QueryGroup.php:643
+#: src/php/Controls/QueryGroup.php:660
 msgid "Please note that the \"Order By\" option is ignored once you select individual posts to include. Use drag & drop sorting in the \"Include Posts\" field instead."
 msgstr ""
 
-#: src/php/Controls/QueryGroup.php:644
+#: src/php/Controls/QueryGroup.php:661
 msgid "Order"
 msgstr ""
 
-#: src/php/Controls/QueryGroup.php:645
+#: src/php/Controls/QueryGroup.php:662
 msgid "Limit Posts for Display (0 for no limit)"
 msgstr ""
