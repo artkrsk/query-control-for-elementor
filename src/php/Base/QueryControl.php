@@ -6,9 +6,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-use \Elementor\Control_Select2;
-use \Elementor\Core\Editor\Editor;
-use \Elementor\Core\Common\Modules\Ajax\Module as AJAXManager;
+use Elementor\Control_Select2;
+use Elementor\Core\Editor\Editor;
+use Elementor\Core\Common\Modules\Ajax\Module as AJAXManager;
 
 /**
  * Abstract Query Control base class
@@ -26,7 +26,7 @@ abstract class QueryControl extends Control_Select2 {
 	 *
 	 * @since 1.0.0
 	 * @access protected
-	 * @var array
+	 * @var array<class-string, static>
 	 */
 	protected static $instances = array();
 
@@ -65,13 +65,15 @@ abstract class QueryControl extends Control_Select2 {
 	 *
 	 * @since 1.0.0
 	 * @access public
-	 * @return object The instance of this class.
+	 * @return static The instance of this class.
 	 */
-	public static function instance() {
+	public static function instance(): static {
 		$cls = static::class;
 
 		if ( ! isset( self::$instances[ $cls ] ) ) {
-			self::$instances[ $cls ] = new static();
+			// PHPStan cannot verify static instantiation returns correct type at analysis time
+			$instance                = new static(); // @phpstan-ignore new.static
+			self::$instances[ $cls ] = $instance;
 		}
 
 		return self::$instances[ $cls ];
@@ -86,8 +88,10 @@ abstract class QueryControl extends Control_Select2 {
 	 * @access public
 	 * @return string Control type.
 	 */
-	public function get_type() {
-		return static::TYPE;
+	public function get_type(): string {
+		$type = static::TYPE;
+
+		return is_string( $type ) ? $type : '';
 	}
 
 	/**
@@ -97,8 +101,10 @@ abstract class QueryControl extends Control_Select2 {
 	 * @access public
 	 * @return string AJAX action name.
 	 */
-	public function get_action() {
-		return static::ACTION_GET;
+	public function get_action(): string {
+		$action = static::ACTION_GET;
+
+		return is_string( $action ) ? $action : '';
 	}
 
 	/**
@@ -108,8 +114,10 @@ abstract class QueryControl extends Control_Select2 {
 	 * @access public
 	 * @return string AJAX action name for autocomplete.
 	 */
-	public function get_action_autocomplete() {
-		return static::ACTION_AUTOCOMPLETE;
+	public function get_action_autocomplete(): string {
+		$action = static::ACTION_AUTOCOMPLETE;
+
+		return is_string( $action ) ? $action : '';
 	}
 
 	/**
@@ -123,13 +131,16 @@ abstract class QueryControl extends Control_Select2 {
 	 * @param AJAXManager $ajax_manager The Elementor AJAX manager.
 	 * @return void
 	 */
-	public function register_ajax_action( AJAXManager $ajax_manager ) {
-		if ( static::ACTION_GET ) {
-			$ajax_manager->register_ajax_action( static::ACTION_GET, array( static::class, 'ajax_action_get' ) );
+	public function register_ajax_action( AJAXManager $ajax_manager ): void {
+		$action_get          = static::ACTION_GET;
+		$action_autocomplete = static::ACTION_AUTOCOMPLETE;
+
+		if ( $action_get && is_string( $action_get ) ) {
+			$ajax_manager->register_ajax_action( $action_get, array( static::class, 'ajax_action_get' ) );
 		}
 
-		if ( static::ACTION_AUTOCOMPLETE ) {
-			$ajax_manager->register_ajax_action( static::ACTION_AUTOCOMPLETE, array( static::class, 'ajax_action_autocomplete' ) );
+		if ( $action_autocomplete && is_string( $action_autocomplete ) ) {
+			$ajax_manager->register_ajax_action( $action_autocomplete, array( static::class, 'ajax_action_autocomplete' ) );
 		}
 	}
 
@@ -143,10 +154,10 @@ abstract class QueryControl extends Control_Select2 {
 	 * @access public
 	 * @static
 	 *
-	 * @param array $data Request data.
-	 * @return array|WP_Error Response data or WP_Error on failure.
+	 * @param array<string, mixed> $data Request data.
+	 * @return array<int|string, mixed>|\WP_Error Response data or WP_Error on failure.
 	 */
-	public static function ajax_action_get( $data ) {
+	public static function ajax_action_get( array $data ): array|\WP_Error {
 		if ( ! current_user_can( Editor::EDITING_CAPABILITY ) ) {
 			return new \WP_Error( 'access_denied', esc_html__( 'Access denied.', 'arts-query-control-for-elementor' ) );
 		}
@@ -165,10 +176,10 @@ abstract class QueryControl extends Control_Select2 {
 	 * @access public
 	 * @static
 	 *
-	 * @param array $data Request data.
-	 * @return array|WP_Error Response data in the format expected by Select2 or WP_Error on failure.
+	 * @param array<string, mixed> $data Request data.
+	 * @return array<string, mixed>|\WP_Error Response data in the format expected by Select2 or WP_Error on failure.
 	 */
-	public static function ajax_action_autocomplete( $data ) {
+	public static function ajax_action_autocomplete( array $data ): array|\WP_Error {
 		if ( ! current_user_can( Editor::EDITING_CAPABILITY ) ) {
 			return new \WP_Error( 'access_denied', esc_html__( 'Access denied.', 'arts-query-control-for-elementor' ) );
 		}
@@ -188,17 +199,26 @@ abstract class QueryControl extends Control_Select2 {
 	 * @access protected
 	 * @static
 	 *
-	 * @param array $data The request data.
-	 * @return array|\WP_Error The processed query data or error object.
+	 * @param array<string, mixed> $data The request data.
+	 * @return array<string, mixed>|\WP_Error The processed query data or error object.
+	 * @phpstan-return array<string, mixed>|\WP_Error
 	 */
-	protected static function autocomplete_query_data( $data ) {
+	protected static function autocomplete_query_data( array $data ): array|\WP_Error {
 		if ( ! isset( $data['autocomplete'] ) || empty( $data['autocomplete'] ) ) {
 			return new \WP_Error( 'ArtsQueryControlAutocomplete', esc_html__( 'Empty or incomplete data', 'arts-query-control-for-elementor' ) );
 		}
 
 		$autocomplete = $data['autocomplete'];
 
-		$query = $data['autocomplete']['query'];
+		if ( ! is_array( $autocomplete ) || ! isset( $autocomplete['query'] ) ) {
+			return new \WP_Error( 'ArtsQueryControlAutocomplete', esc_html__( 'Empty or incomplete data', 'arts-query-control-for-elementor' ) );
+		}
+
+		$query = $autocomplete['query'];
+
+		if ( ! is_array( $query ) ) {
+			$query = array();
+		}
 
 		if ( empty( $query['post_type'] ) ) {
 			$query['post_type'] = 'any';
@@ -207,12 +227,9 @@ abstract class QueryControl extends Control_Select2 {
 		$query['posts_per_page'] = -1;
 		$query['s']              = isset( $data['search'] ) ? $data['search'] : '';
 
-		if ( is_wp_error( $query ) ) {
-			return $query;
-		}
-
 		$autocomplete['query'] = $query;
 
+		/** @var array<string, mixed> */
 		return $autocomplete;
 	}
 
@@ -230,7 +247,7 @@ abstract class QueryControl extends Control_Select2 {
 	 * @param int      $max  The maximum number of parents to display. Default 3.
 	 * @return string The formatted post name with parents.
 	 */
-	protected static function get_post_name_with_parents( $post, $max = 3 ) {
+	protected static function get_post_name_with_parents( \WP_Post $post, int $max = 3 ): string {
 		if ( $post->post_parent === 0 ) {
 			return $post->post_title;
 		}
@@ -242,7 +259,7 @@ abstract class QueryControl extends Control_Select2 {
 		while ( $test_post->post_parent > 0 ) {
 			$test_post = get_post( $test_post->post_parent );
 
-			if ( ! $test_post ) {
+			if ( ! $test_post instanceof \WP_Post ) {
 				break;
 			}
 
@@ -272,9 +289,11 @@ abstract class QueryControl extends Control_Select2 {
 	 *
 	 * @since 1.0.0
 	 * @access protected
-	 * @return array Control default settings.
+	 * @return array<string, mixed> Control default settings.
+	 * @phpstan-return array<string, mixed>
 	 */
-	protected function get_default_settings() {
+	protected function get_default_settings(): array {
+		/** @var array<string, mixed> */
 		return array_merge(
 			parent::get_default_settings(),
 			array(

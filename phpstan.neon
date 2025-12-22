@@ -1,0 +1,15 @@
+includes:
+	- vendor/szepeviktor/phpstan-wordpress/extension.neon
+
+parameters:
+	level: max
+	phpVersion: 80000
+
+	paths:
+		- src/php
+
+	scanFiles:
+		- vendor/arts/elementor-stubs/elementor-stubs.php
+
+	treatPhpDocTypesAsCertain: false
+

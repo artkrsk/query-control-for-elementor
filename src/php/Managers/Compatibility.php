@@ -6,7 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-use \Arts\ElementorExtension\Plugins\BaseManager;
+use Arts\ElementorExtension\Plugins\BaseManager;
 
 /**
  * Compatibility Class
@@ -38,7 +38,7 @@ class Compatibility extends BaseManager {
 	 * @access public
 	 * @return void
 	 */
-	public function elementor_enqueue_editor_scripts() {
+	public function elementor_enqueue_editor_scripts(): void {
 		wp_enqueue_script(
 			$this->handle,
 			esc_url( untrailingslashit( $this->plugin_dir_url ) . '/libraries/arts-query-control-for-elementor/index.umd.js' ),
@@ -57,7 +57,7 @@ class Compatibility extends BaseManager {
 	 * @access public
 	 * @return void
 	 */
-	public function elementor_enqueue_editor_styles() {
+	public function elementor_enqueue_editor_styles(): void {
 		wp_enqueue_style(
 			$this->handle,
 			esc_url( untrailingslashit( $this->plugin_dir_url ) . '/libraries/arts-query-control-for-elementor/index.css' ),

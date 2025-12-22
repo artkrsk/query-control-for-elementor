@@ -6,8 +6,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-use \Elementor\Core\Editor\Editor;
-use \Arts\QueryControl\Base\QueryControl;
+use Elementor\Core\Editor\Editor;
+use Arts\QueryControl\Base\QueryControl;
 
 /**
  * QueryPostTypesSelect Control Class
@@ -24,7 +24,7 @@ class QueryPostTypesSelect extends QueryControl {
 	 * @since 1.0.0
 	 * @access public
 	 * @static
-	 * @var array
+	 * @var array<string, string>
 	 */
 	public static $post_types = array();
 
@@ -57,16 +57,18 @@ class QueryPostTypesSelect extends QueryControl {
 	 * @since 1.0.0
 	 * @access public
 	 * @static
-	 * @return QueryPostTypesSelect The singleton instance.
+	 * @return static The singleton instance.
 	 */
-	public static function instance() {
+	public static function instance(): static {
 		$cls = static::class;
 
 		if ( ! isset( self::$instances[ $cls ] ) ) {
-			self::$instances[ $cls ] = new static();
+			$instance = new static(); // @phpstan-ignore new.static
+			/** @var static $instance */
+			self::$instances[ $cls ] = $instance;
 		}
 
-		if ( is_null( self::$post_types ) ) {
+		if ( empty( self::$post_types ) ) {
 			self::$post_types = self::get_post_types();
 		}
 
@@ -81,9 +83,9 @@ class QueryPostTypesSelect extends QueryControl {
 	 *
 	 * @since 1.0.0
 	 * @access protected
-	 * @return array Control default settings.
+	 * @return array<string, mixed> Control default settings.
 	 */
-	protected function get_default_settings() {
+	protected function get_default_settings(): array {
 		return array_merge(
 			parent::get_default_settings(),
 			array(
@@ -111,10 +113,10 @@ class QueryPostTypesSelect extends QueryControl {
 	 * @access public
 	 * @static
 	 *
-	 * @param array $data The request data.
-	 * @return array|WP_Error List of post types or WP_Error on access denied.
+	 * @param array<string, mixed> $data The request data.
+	 * @return array<string, string>|\WP_Error List of post types or WP_Error on access denied.
 	 */
-	public static function ajax_action_get( $data ) {
+	public static function ajax_action_get( array $data ): array|\WP_Error {
 		if ( ! current_user_can( Editor::EDITING_CAPABILITY ) ) {
 			return new \WP_Error( 'access_denied', esc_html__( 'Access denied.', 'arts-query-control-for-elementor' ) );
 		}
@@ -132,15 +134,15 @@ class QueryPostTypesSelect extends QueryControl {
 	 * @access public
 	 * @static
 	 *
-	 * @param array $data The request data.
-	 * @return array|WP_Error The filtered post types for Select2 or WP_Error on failure.
+	 * @param array<string, mixed> $data The request data.
+	 * @return array<string, mixed>|\WP_Error The filtered post types for Select2 or WP_Error on failure.
 	 */
-	public static function ajax_action_autocomplete( $data ) {
+	public static function ajax_action_autocomplete( array $data ): array|\WP_Error {
 		if ( ! current_user_can( Editor::EDITING_CAPABILITY ) ) {
 			return new \WP_Error( 'access_denied', esc_html__( 'Access denied.', 'arts-query-control-for-elementor' ) );
 		}
 
-		$search = isset( $data['search'] ) ? sanitize_text_field( $data['search'] ) : '';
+		$search = isset( $data['search'] ) && is_string( $data['search'] ) ? sanitize_text_field( $data['search'] ) : '';
 
 		$all_post_types = self::get_post_types();
 		$results        = array();
@@ -160,25 +162,6 @@ class QueryPostTypesSelect extends QueryControl {
 		);
 	}
 
-	/**
-	 * Format post for display.
-	 *
-	 * Creates a human-readable post title, including parent hierarchy for hierarchical post types.
-	 *
-	 * @since 1.0.0
-	 * @access private
-	 * @static
-	 *
-	 * @param \WP_Post $post The post object.
-	 * @return string The formatted post title.
-	 */
-	private static function get_formatted_post_to_display( $post ) {
-		$post_type_obj = get_post_type_object( $post->post_type );
-
-		$text = ( $post_type_obj->hierarchical ) ? self::get_post_name_with_parents( $post ) : $post->post_title;
-
-		return esc_html( $text );
-	}
 
 	/**
 	 * Retrieves an array of post types.
@@ -191,9 +174,9 @@ class QueryPostTypesSelect extends QueryControl {
 	 * @since 1.0.0
 	 * @access public
 	 * @static
-	 * @return array An associative array of post type slugs and names.
+	 * @return array<string, string> An associative array of post type slugs and names.
 	 */
-	public static function get_post_types() {
+	public static function get_post_types(): array {
 		if ( ! empty( self::$post_types ) ) {
 			return self::$post_types;
 		}
@@ -206,6 +189,10 @@ class QueryPostTypesSelect extends QueryControl {
 			)
 		);
 
+		if ( ! is_array( $args ) ) {
+			$args = array();
+		}
+
 		$exclude_types = apply_filters(
 			'arts/query_control/post_types/exclude',
 			array(
@@ -216,6 +203,10 @@ class QueryPostTypesSelect extends QueryControl {
 			)
 		);
 
+		if ( ! is_array( $exclude_types ) ) {
+			$exclude_types = array();
+		}
+
 		$include_types = apply_filters(
 			'arts/query_control/post_types/include',
 			array(
@@ -223,6 +214,10 @@ class QueryPostTypesSelect extends QueryControl {
 				'post',
 			)
 		);
+
+		if ( ! is_array( $include_types ) ) {
+			$include_types = array();
+		}
 
 		$result = array();
 
@@ -232,13 +227,13 @@ class QueryPostTypesSelect extends QueryControl {
 		$post_types = get_post_types( $args, $output, $operator );
 
 		// Check if get_post_types returned a valid result
-		if ( is_wp_error( $post_types ) || empty( $post_types ) ) {
+		if ( ! is_array( $post_types ) || empty( $post_types ) ) {
 			return array();
 		}
 
 		// Add available post types
-		foreach ( $post_types  as $object_post_type ) {
-			if ( ! in_array( $object_post_type->name, $exclude_types ) ) {
+		foreach ( $post_types as $object_post_type ) {
+			if ( ! in_array( $object_post_type->name, $exclude_types, true ) ) {
 				$result[ $object_post_type->name ] = $object_post_type->labels->name;
 			}
 		}
@@ -246,6 +241,10 @@ class QueryPostTypesSelect extends QueryControl {
 		// Include additional post types
 		if ( ! empty( $include_types ) ) {
 			foreach ( $include_types as $post_type ) {
+				if ( ! is_string( $post_type ) ) {
+					continue;
+				}
+
 				$object_post_type = get_post_type_object( $post_type );
 
 				if ( $object_post_type ) {
@@ -254,6 +253,7 @@ class QueryPostTypesSelect extends QueryControl {
 			}
 		}
 
+		/** @var array<string, string> */
 		return array_unique( $result );
 	}
 }

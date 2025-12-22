@@ -6,8 +6,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-use \Elementor\Core\Editor\Editor;
-use \Arts\QueryControl\Base\QueryControl;
+use Elementor\Core\Editor\Editor;
+use Arts\QueryControl\Base\QueryControl;
 
 /**
  * QueryMenusSelect Control Class
@@ -47,9 +47,9 @@ class QueryMenusSelect extends QueryControl {
 	 *
 	 * @since 1.0.0
 	 * @access protected
-	 * @return array Control default settings.
+	 * @return array<string, mixed> Control default settings.
 	 */
-	protected function get_default_settings() {
+	protected function get_default_settings(): array {
 		return array_merge(
 			parent::get_default_settings(),
 			array(
@@ -77,10 +77,10 @@ class QueryMenusSelect extends QueryControl {
 	 * @access public
 	 * @static
 	 *
-	 * @param array $data The request data.
-	 * @return array|WP_Error List of navigation menus or WP_Error if access denied.
+	 * @param array<string, mixed> $data The request data.
+	 * @return array<string, string>|\WP_Error List of navigation menus or WP_Error if access denied.
 	 */
-	public static function ajax_action_get( $data ) {
+	public static function ajax_action_get( array $data ): array|\WP_Error {
 		if ( ! current_user_can( Editor::EDITING_CAPABILITY ) ) {
 			return new \WP_Error( 'access_denied', esc_html__( 'Access denied.', 'arts-query-control-for-elementor' ) );
 		}
@@ -98,15 +98,15 @@ class QueryMenusSelect extends QueryControl {
 	 * @access public
 	 * @static
 	 *
-	 * @param array $data Request data.
-	 * @return array|WP_Error Array of menus in Select2 format or WP_Error if request is invalid.
+	 * @param array<string, mixed> $data Request data.
+	 * @return array<string, mixed>|\WP_Error Array of menus in Select2 format or WP_Error if request is invalid.
 	 */
-	public static function ajax_action_autocomplete( $data ) {
+	public static function ajax_action_autocomplete( array $data ): array|\WP_Error {
 		if ( ! current_user_can( Editor::EDITING_CAPABILITY ) ) {
 			return new \WP_Error( 'access_denied', esc_html__( 'Access denied.', 'arts-query-control-for-elementor' ) );
 		}
 
-		$search = isset( $data['search'] ) ? sanitize_text_field( $data['search'] ) : '';
+		$search = isset( $data['search'] ) && is_string( $data['search'] ) ? sanitize_text_field( $data['search'] ) : '';
 
 		$menus = wp_get_nav_menus();
 
@@ -136,9 +136,9 @@ class QueryMenusSelect extends QueryControl {
 	 * @since 1.0.0
 	 * @access private
 	 * @static
-	 * @return array An associative array of menu slugs and names.
+	 * @return array<string, string> An associative array of menu slugs and names.
 	 */
-	private static function get_menus() {
+	private static function get_menus(): array {
 		$menus = wp_get_nav_menus();
 
 		$result = array();

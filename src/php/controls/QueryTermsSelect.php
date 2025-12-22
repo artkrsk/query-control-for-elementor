@@ -6,8 +6,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-use \Elementor\Core\Editor\Editor;
-use \Arts\QueryControl\Base\QueryControl;
+use Elementor\Core\Editor\Editor;
+use Arts\QueryControl\Base\QueryControl;
 
 /**
  * QueryTermsSelect Class
@@ -47,9 +47,9 @@ class QueryTermsSelect extends QueryControl {
 	 *
 	 * @since 1.0.0
 	 * @access protected
-	 * @return array Control default settings.
+	 * @return array<string, mixed> Control default settings.
 	 */
-	protected function get_default_settings() {
+	protected function get_default_settings(): array {
 		return array_merge(
 			parent::get_default_settings(),
 			array(
@@ -73,10 +73,10 @@ class QueryTermsSelect extends QueryControl {
 	 * @access public
 	 * @static
 	 *
-	 * @param array $data Request data.
-	 * @return array|WP_Error Array of terms or WP_Error if request is invalid.
+	 * @param array<string, mixed> $data Request data.
+	 * @return array<int|string, mixed>|\WP_Error Array of terms or WP_Error if request is invalid.
 	 */
-	public static function ajax_action_get( $data ) {
+	public static function ajax_action_get( array $data ): array|\WP_Error {
 		if ( ! current_user_can( Editor::EDITING_CAPABILITY ) ) {
 			return new \WP_Error( 'access_denied', esc_html__( 'Access denied.', 'arts-query-control-for-elementor' ) );
 		}
@@ -85,13 +85,27 @@ class QueryTermsSelect extends QueryControl {
 			return new \WP_Error( 'ArtsQueryControlGetTitles', esc_html__( 'Empty or incomplete data', 'arts-query-control-for-elementor' ) );
 		}
 
+		if ( ! is_array( $data['get_titles'] ) || ! isset( $data['get_titles']['query'] ) ) {
+			return new \WP_Error( 'ArtsQueryControlGetTitles', esc_html__( 'Empty or incomplete data', 'arts-query-control-for-elementor' ) );
+		}
+
 		$query = $data['get_titles']['query'];
+
+		if ( ! is_array( $query ) ) {
+			$query = array();
+		}
 
 		if ( empty( $query['post_type'] ) ) {
 			$query['post_type'] = 'any';
 		}
 
-		$taxonomies = get_object_taxonomies( $query['post_type'], 'objects' );
+		$post_type_value = isset( $query['post_type'] ) ? $query['post_type'] : 'any';
+		$post_type       = is_string( $post_type_value ) ? $post_type_value : 'any';
+		$taxonomies      = get_object_taxonomies( $post_type, 'objects' );
+
+		if ( ! is_array( $taxonomies ) ) {
+			return array();
+		}
 
 		$terms = array();
 
@@ -103,6 +117,10 @@ class QueryTermsSelect extends QueryControl {
 					'hide_empty' => false,
 				)
 			);
+
+			if ( is_wp_error( $taxonomy_terms ) || ! is_array( $taxonomy_terms ) ) {
+				continue;
+			}
 
 			foreach ( $taxonomy_terms as $term ) {
 				$terms[ $term->term_id ] = esc_html( $term->name );
@@ -122,10 +140,10 @@ class QueryTermsSelect extends QueryControl {
 	 * @access public
 	 * @static
 	 *
-	 * @param array $data Request data.
-	 * @return array|WP_Error Array of terms in Select2 format or WP_Error if request is invalid.
+	 * @param array<string, mixed> $data Request data.
+	 * @return array<string, mixed>|\WP_Error Array of terms in Select2 format or WP_Error if request is invalid.
 	 */
-	public static function ajax_action_autocomplete( $data ) {
+	public static function ajax_action_autocomplete( array $data ): array|\WP_Error {
 		if ( ! current_user_can( Editor::EDITING_CAPABILITY ) ) {
 			return new \WP_Error( 'access_denied', esc_html__( 'Access denied.', 'arts-query-control-for-elementor' ) );
 		}
@@ -137,12 +155,34 @@ class QueryTermsSelect extends QueryControl {
 			return $query_data;
 		}
 
-		$include_taxonomies = isset( $query_data['query']['include'] ) ? $query_data['query']['include'] : array();
-		$include_taxonomies = array_map( 'sanitize_text_field', $include_taxonomies );
-		$exclude_taxonomies = isset( $query_data['query']['exclude'] ) ? $query_data['query']['exclude'] : array();
-		$exclude_taxonomies = array_map( 'sanitize_text_field', $exclude_taxonomies );
-		$taxonomies         = get_object_taxonomies( $query_data['query']['post_type'], 'objects' );
-		$terms              = array();
+		if ( ! isset( $query_data['query'] ) || ! is_array( $query_data['query'] ) ) {
+			return new \WP_Error( 'invalid_query', esc_html__( 'Invalid query data.', 'arts-query-control-for-elementor' ) );
+		}
+
+		$include_taxonomies = isset( $query_data['query']['include'] ) && is_array( $query_data['query']['include'] ) ? $query_data['query']['include'] : array();
+		$include_taxonomies = array_map(
+			static function ( $item ): string {
+				return sanitize_text_field( is_scalar( $item ) ? (string) $item : '' );
+			},
+			$include_taxonomies
+		);
+		$exclude_taxonomies = isset( $query_data['query']['exclude'] ) && is_array( $query_data['query']['exclude'] ) ? $query_data['query']['exclude'] : array();
+		$exclude_taxonomies = array_map(
+			static function ( $item ): string {
+				return sanitize_text_field( is_scalar( $item ) ? (string) $item : '' );
+			},
+			$exclude_taxonomies
+		);
+
+		$post_type_value = isset( $query_data['query']['post_type'] ) ? $query_data['query']['post_type'] : 'any';
+		$post_type       = is_string( $post_type_value ) ? $post_type_value : 'any';
+		$taxonomies      = get_object_taxonomies( $post_type, 'objects' );
+
+		if ( ! is_array( $taxonomies ) ) {
+			return array( 'results' => array() );
+		}
+
+		$terms = array();
 
 		// Loop over your taxonomies
 		foreach ( $taxonomies as $taxonomy ) {
@@ -164,14 +204,20 @@ class QueryTermsSelect extends QueryControl {
 				)
 			);
 
+			if ( is_wp_error( $taxonomy_terms ) || ! is_array( $taxonomy_terms ) ) {
+				continue;
+			}
+
 			$arr = array(
 				'text'     => $taxonomy->label,
 				'children' => array(),
 			);
 
+			$search = isset( $data['search'] ) && is_string( $data['search'] ) ? $data['search'] : '';
+
 			foreach ( $taxonomy_terms as $term ) {
-				if ( ! empty( $data['search'] ) ) {
-					if ( strpos( $term->name, $data['search'] ) !== false ) {
+				if ( ! empty( $search ) ) {
+					if ( stripos( $term->name, $search ) !== false ) {
 						$arr['children'][] = array(
 							'id'   => $term->term_id,
 							'text' => $term->name,
