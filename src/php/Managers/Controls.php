@@ -6,14 +6,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-use \Arts\ElementorExtension\Plugins\BaseManager;
-use \Elementor\Controls_Manager;
-use \Arts\QueryControl\Controls\QueryPostTypesSelect;
-use \Arts\QueryControl\Controls\QueryPostsSelect;
-use \Arts\QueryControl\Controls\QueryTermsSelect;
-use \Arts\QueryControl\Controls\QueryMenusSelect;
-use \Arts\QueryControl\Controls\QueryGroup;
-use \Elementor\Core\Common\Modules\Ajax\Module as AJAX_Manager;
+use Arts\ElementorExtension\Plugins\BaseManager;
+use Elementor\Controls_Manager;
+use Arts\QueryControl\Controls\QueryPostTypesSelect;
+use Arts\QueryControl\Controls\QueryPostsSelect;
+use Arts\QueryControl\Controls\QueryTermsSelect;
+use Arts\QueryControl\Controls\QueryMenusSelect;
+use Arts\QueryControl\Controls\QueryGroup;
+use Elementor\Core\Common\Modules\Ajax\Module as AJAX_Manager;
 
 /**
  * Controls Manager Class
@@ -36,7 +36,7 @@ class Controls extends BaseManager {
 	 * @param Controls_Manager $controls_manager The Elementor controls manager instance.
 	 * @return void
 	 */
-	public function register_controls( Controls_Manager $controls_manager ) {
+	public function register_controls( Controls_Manager $controls_manager ): void {
 		$controls_manager->register( QueryPostTypesSelect::instance() );
 		$controls_manager->register( QueryPostsSelect::instance() );
 		$controls_manager->register( QueryTermsSelect::instance() );
@@ -56,7 +56,7 @@ class Controls extends BaseManager {
 	 * @param AJAX_Manager $ajax_manager The AJAX manager instance.
 	 * @return void
 	 */
-	public function register_ajax_actions( AJAX_Manager $ajax_manager ) {
+	public function register_ajax_actions( AJAX_Manager $ajax_manager ): void {
 		QueryPostTypesSelect::instance()->register_ajax_action( $ajax_manager );
 		QueryPostsSelect::instance()->register_ajax_action( $ajax_manager );
 		QueryTermsSelect::instance()->register_ajax_action( $ajax_manager );

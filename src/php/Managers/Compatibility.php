@@ -6,7 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-use \Arts\ElementorExtension\Plugins\BaseManager;
+use Arts\ElementorExtension\Plugins\BaseManager;
 
 /**
  * Compatibility Class
