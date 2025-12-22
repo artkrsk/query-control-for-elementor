@@ -75,3 +75,4 @@ next-env.d.ts
 
 # Project specific
 /drafts
+.claude
