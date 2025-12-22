@@ -6,13 +6,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-use \Arts\ElementorExtension\Plugins\BasePlugin;
-use \Arts\Utilities\Utilities;
+use Arts\ElementorExtension\Plugins\BasePlugin;
+use Arts\Utilities\Utilities;
 
 /**
  * Main plugin class
  *
  * @since 1.0.0
+ * @extends BasePlugin<Containers\ManagersContainer>
+ *
+ * @property Containers\ManagersContainer $managers Manager container with controls and compatibility.
  */
 class Plugin extends BasePlugin {
 	/**
@@ -23,9 +26,9 @@ class Plugin extends BasePlugin {
 	 * @since 1.0.0
 	 * @access protected
 	 *
-	 * @return array Empty array as default configuration.
+	 * @return array<string, mixed> Empty array as default configuration.
 	 */
-	protected function get_default_config() {
+	protected function get_default_config(): array {
 		return array();
 	}
 
@@ -37,9 +40,9 @@ class Plugin extends BasePlugin {
 	 * @since 1.0.0
 	 * @access protected
 	 *
-	 * @return array Empty array as default strings.
+	 * @return array<string, mixed> Empty array as default strings.
 	 */
-	protected function get_default_strings() {
+	protected function get_default_strings(): array {
 		return array();
 	}
 
@@ -53,7 +56,7 @@ class Plugin extends BasePlugin {
 	 *
 	 * @return string WordPress action name.
 	 */
-	protected function get_default_run_action() {
+	protected function get_default_run_action(): string {
 		return 'init';
 	}
 
@@ -66,9 +69,9 @@ class Plugin extends BasePlugin {
 	 * @since 1.0.0
 	 * @access protected
 	 *
-	 * @return array Associative array of manager keys and their corresponding class names.
+	 * @return array<string, class-string> Associative array of manager keys and their corresponding class names.
 	 */
-	protected function get_managers_classes() {
+	protected function get_managers_classes(): array {
 		return array(
 			'controls'      => Managers\Controls::class,
 			'compatibility' => Managers\Compatibility::class,
@@ -84,9 +87,9 @@ class Plugin extends BasePlugin {
 	 * @since 1.0.0
 	 * @access protected
 	 *
-	 * @return Plugin Current plugin instance.
+	 * @return void
 	 */
-	protected function add_actions() {
+	protected function add_actions(): void {
 		// Register query controls
 		add_action( 'elementor/controls/register', array( $this->managers->controls, 'register_controls' ) );
 
@@ -98,8 +101,6 @@ class Plugin extends BasePlugin {
 
 		// Add custom styles to Elementor editor
 		add_action( 'elementor/editor/after_enqueue_styles', array( $this->managers->compatibility, 'elementor_enqueue_editor_styles' ) );
-
-		return $this;
 	}
 
 	/**
@@ -112,12 +113,12 @@ class Plugin extends BasePlugin {
 	 * @since 1.0.0
 	 * @access public
 	 *
-	 * @param array  $settings            The Elementor settings array containing query parameters.
-	 * @param string $data_control_prefix The prefix for the data control in the settings array.
+	 * @param array<string, mixed> $settings            The Elementor settings array containing query parameters.
+	 * @param string               $data_control_prefix The prefix for the data control in the settings array.
 	 *
-	 * @return array An array of queried posts with detailed information.
+	 * @return array<int, mixed> An array of queried posts with detailed information.
 	 */
-	public static function get_queried_posts( $settings, $data_control_prefix = '' ) {
+	public static function get_queried_posts( array $settings, string $data_control_prefix = '' ): array {
 		$post_type = self::get_setting( $settings, $data_control_prefix . 'post_type' );
 		$posts     = array();
 
@@ -133,15 +134,22 @@ class Plugin extends BasePlugin {
 		$loop = new \WP_Query( $query_args );
 
 		if ( $loop->have_posts() ) {
-			$taxonomies = get_object_taxonomies( $query_args['post_type'], 'objects' );
+			$post_type_value = isset( $query_args['post_type'] ) && is_string( $query_args['post_type'] ) ? $query_args['post_type'] : 'post';
+			$taxonomies      = get_object_taxonomies( $post_type_value, 'objects' );
+			$taxonomies_list = array_values( $taxonomies );
 
 			while ( $loop->have_posts() ) {
 				$loop->the_post();
 
 				$post_id = get_the_ID();
 
+				if ( ! $post_id ) {
+					continue;
+				}
+
 				// Standard WP fields
-				$posts[ $counter ]['id']    = $posts[ $counter ]['ID'] = $post_id;
+				$posts[ $counter ]['id']    = $post_id;
+				$posts[ $counter ]['ID']    = $post_id;
 				$posts[ $counter ]['title'] = get_the_title();
 				$posts[ $counter ]['link']  = array(
 					'url'         => get_the_permalink(),
@@ -157,12 +165,12 @@ class Plugin extends BasePlugin {
 				);
 
 				// Post taxonomies and terms
-				$posts[ $counter ]['taxonomies'] = Utilities::get_post_terms( $taxonomies, $post_id );
+				$posts[ $counter ]['taxonomies'] = Utilities::get_post_terms( $taxonomies_list, $post_id );
 
 				// ACF registered fields
 				$posts[ $counter ]['acf_fields'] = Utilities::acf_get_post_fields( $post_id );
 
-				$counter++;
+				++$counter;
 			}
 
 			wp_reset_postdata();
@@ -180,12 +188,13 @@ class Plugin extends BasePlugin {
 	 * @since 1.0.0
 	 * @access public
 	 *
-	 * @param array  $settings            The Elementor settings array containing query parameters.
-	 * @param string $data_control_prefix The prefix for the data control in the settings array.
+	 * @param array<string, mixed> $settings            The Elementor settings array containing query parameters.
+	 * @param string               $data_control_prefix The prefix for the data control in the settings array.
 	 *
-	 * @return array The query arguments for fetching posts.
+	 * @return array<string, mixed> The query arguments for fetching posts.
+	 * @phpstan-return array<string, mixed>
 	 */
-	public static function get_posts_query_args( $settings = array(), $data_control_prefix = '' ) {
+	public static function get_posts_query_args( array $settings = array(), string $data_control_prefix = '' ): array {
 		$is_archive = Utilities::is_archive();
 
 		$post_type     = self::get_setting( $settings, $data_control_prefix . 'post_type', '' );
@@ -226,14 +235,23 @@ class Plugin extends BasePlugin {
 			$query_args['posts_per_page'] = -1;
 		}
 
-		if ( ! $is_archive && $posts_query === 'all' && $posts_amount && $posts_amount['size'] > 0 ) {
+		if ( ! $is_archive && $posts_query === 'all' && is_array( $posts_amount ) && isset( $posts_amount['size'] ) && $posts_amount['size'] > 0 ) {
 			$query_args['posts_per_page'] = $posts_amount['size'];
 		}
 
 		if ( $posts_query === 'include' ) {
 			// Include posts by chosen taxonomy terms
 			if ( is_array( $include_terms ) && ! empty( $include_terms ) ) {
-				 $query_args['tax_query'] = Utilities::get_tax_query( $include_terms, 'IN' );
+				/** @var list<int> $include_terms_list */
+				$include_terms_list      = array_values(
+					array_map(
+						static function ( $term ): int {
+							return is_scalar( $term ) ? (int) $term : 0;
+						},
+						$include_terms
+					)
+				);
+				$query_args['tax_query'] = Utilities::get_tax_query( $include_terms_list, 'IN' );
 			}
 
 			// Include posts IDs
@@ -246,7 +264,16 @@ class Plugin extends BasePlugin {
 		if ( $posts_query === 'exclude' ) {
 			// Exclude posts by chosen taxonomy terms
 			if ( is_array( $exclude_terms ) && ! empty( $exclude_terms ) ) {
-				$query_args['tax_query'] = Utilities::get_tax_query( $exclude_terms, 'NOT IN' );
+				/** @var list<int> $exclude_terms_list */
+				$exclude_terms_list      = array_values(
+					array_map(
+						static function ( $term ): int {
+							return is_scalar( $term ) ? (int) $term : 0;
+						},
+						$exclude_terms
+					)
+				);
+				$query_args['tax_query'] = Utilities::get_tax_query( $exclude_terms_list, 'NOT IN' );
 			}
 
 			// Exclude posts IDs
@@ -263,10 +290,11 @@ class Plugin extends BasePlugin {
 		 *
 		 * @since 1.0.0
 		 *
-		 * @param array $query_args The query arguments for fetching posts.
+		 * @param array<string, mixed> $query_args The query arguments for fetching posts.
 		 */
 		$query_args = apply_filters( 'arts/query_control/query_args', $query_args );
 
+		/** @var array<string, mixed> */
 		return $query_args;
 	}
 
@@ -278,13 +306,16 @@ class Plugin extends BasePlugin {
 	 * @since 1.0.0
 	 * @access private
 	 *
-	 * @param array  $settings The settings array to retrieve from.
-	 * @param string $key      The key to retrieve from the settings.
-	 * @param mixed  $default  The default value if the key is not set.
+	 * @param array<string, mixed> $settings The settings array to retrieve from.
+	 * @param string               $key      The key to retrieve from the settings.
+	 * @param mixed                $default  The default value if the key is not set.
 	 *
 	 * @return mixed The setting value or the default.
 	 */
-	private static function get_setting( $settings, $key, $default = null ) {
+	private static function get_setting( array $settings, string $key, mixed $default = null ): mixed {
 		return isset( $settings[ $key ] ) ? $settings[ $key ] : $default;
 	}
 }
+
+// Auto load
+Plugin::instance();
