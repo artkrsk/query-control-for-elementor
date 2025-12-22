@@ -245,7 +245,7 @@ class Plugin extends BasePlugin {
 			$query_args['posts_per_page'] = -1;
 		}
 
-		if ( ! $is_archive && $posts_query === 'all' && is_array( $posts_amount ) && isset( $posts_amount['size'] ) && $posts_amount['size'] > 0 ) {
+		if ( ! $is_archive && is_array( $posts_amount ) && isset( $posts_amount['size'] ) && $posts_amount['size'] > 0 ) {
 			$query_args['posts_per_page'] = $posts_amount['size'];
 		}
 

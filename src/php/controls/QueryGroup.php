@@ -362,9 +362,8 @@ class QueryGroup extends Group_Control_Base {
 				),
 				'group'     => $group_name,
 				'condition' => array(
-					'source'      => 'dynamic',
-					'posts_query' => 'all',
-					'is_archive'  => '',
+					'source'     => 'dynamic',
+					'is_archive' => '',
 				),
 			);
 		}
