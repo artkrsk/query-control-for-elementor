@@ -134,7 +134,17 @@ class Plugin extends BasePlugin {
 		$loop = new \WP_Query( $query_args );
 
 		if ( $loop->have_posts() ) {
-			$post_type_value = isset( $query_args['post_type'] ) && is_string( $query_args['post_type'] ) ? $query_args['post_type'] : 'post';
+			// Handle both string and array post_type values from WP_Query
+			$post_type_value = 'post';
+			if ( isset( $query_args['post_type'] ) ) {
+				if ( is_string( $query_args['post_type'] ) ) {
+					$post_type_value = $query_args['post_type'];
+				} elseif ( is_array( $query_args['post_type'] ) && ! empty( $query_args['post_type'] ) ) {
+					// get_object_taxonomies() accepts array<string>, ensure we have string values
+					$post_type_value = array_values( array_filter( $query_args['post_type'], 'is_string' ) );
+				}
+			}
+
 			$taxonomies      = get_object_taxonomies( $post_type_value, 'objects' );
 			$taxonomies_list = array_values( $taxonomies );
 

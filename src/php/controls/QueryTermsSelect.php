@@ -217,7 +217,7 @@ class QueryTermsSelect extends QueryControl {
 
 			foreach ( $taxonomy_terms as $term ) {
 				if ( ! empty( $search ) ) {
-					if ( strpos( $term->name, $search ) !== false ) {
+					if ( stripos( $term->name, $search ) !== false ) {
 						$arr['children'][] = array(
 							'id'   => $term->term_id,
 							'text' => $term->name,

@@ -71,6 +71,7 @@ abstract class QueryControl extends Control_Select2 {
 		$cls = static::class;
 
 		if ( ! isset( self::$instances[ $cls ] ) ) {
+			// PHPStan cannot verify static instantiation returns correct type at analysis time
 			$instance                = new static(); // @phpstan-ignore new.static
 			self::$instances[ $cls ] = $instance;
 		}
