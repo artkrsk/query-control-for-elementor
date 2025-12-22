@@ -12,6 +12,7 @@ dist export-ignore
 scripts export-ignore
 vendor export-ignore
 __build__ export-ignore
+__assets__ export-ignore
 
 # Testing and documentation
 __tests__ export-ignore
@@ -38,6 +39,7 @@ coverage export-ignore
 src/ts export-ignore
 src/js export-ignore
 src/styles export-ignore
+src/wordpress-plugin export-ignore
 
 # WordPress development files
 project.*.js export-ignore
@@ -45,3 +47,8 @@ project.*.js export-ignore
 # Markdown files except README.md
 /*.md export-ignore
 !README.md
+.claude export-ignore
+.github export-ignore
+.taskmaster export-ignore
+.vscode export-ignore
+fixtures export-ignore
