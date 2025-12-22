@@ -6,14 +6,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-use \Arts\Utilities\Utilities;
-use \Arts\QueryControl\Controls\QueryPostsSelect;
-use \Arts\QueryControl\Controls\QueryPostTypesSelect;
-use \Arts\QueryControl\Controls\QueryTermsSelect;
-use \Elementor\Group_Control_Base;
-use \Elementor\Controls_Manager;
-use \Elementor\Utils;
-use \Elementor\Repeater;
+use Arts\Utilities\Utilities;
+use Arts\QueryControl\Controls\QueryPostsSelect;
+use Arts\QueryControl\Controls\QueryPostTypesSelect;
+use Arts\QueryControl\Controls\QueryTermsSelect;
+use Elementor\Group_Control_Base;
+use Elementor\Controls_Manager;
+use Elementor\Utils;
+use Elementor\Repeater;
 
 /**
  * QueryGroup Control Class
@@ -32,7 +32,7 @@ class QueryGroup extends Group_Control_Base {
 	 *
 	 * @since 1.0.0
 	 * @access protected
-	 * @var Control
+	 * @var static|null
 	 */
 	protected static $instance;
 
@@ -43,7 +43,7 @@ class QueryGroup extends Group_Control_Base {
 	 *
 	 * @since 1.0.0
 	 * @access protected
-	 * @var array
+	 * @var array<string, mixed>|null
 	 */
 	protected static $fields;
 
@@ -56,11 +56,13 @@ class QueryGroup extends Group_Control_Base {
 	 * @since 1.0.0
 	 * @access public
 	 * @static
-	 * @return object The instance of this class.
+	 * @return static The instance of this class.
 	 */
-	public static function instance() {
+	public static function instance(): static {
 		if ( is_null( self::$instance ) ) {
-			self::$instance = new self();
+			$instance = new self();
+			/** @var static $instance */
+			self::$instance = $instance;
 		}
 
 		return self::$instance;
@@ -76,7 +78,7 @@ class QueryGroup extends Group_Control_Base {
 	 * @static
 	 * @return string The group control type.
 	 */
-	public static function get_type() {
+	public static function get_type(): string {
 		return 'arts-query-control-for-elementor-group-control';
 	}
 
@@ -88,9 +90,9 @@ class QueryGroup extends Group_Control_Base {
 	 *
 	 * @since 1.0.0
 	 * @access protected
-	 * @return array Default arguments for all the child controls.
+	 * @return array<string, mixed> Default arguments for all the child controls.
 	 */
-	protected function get_child_default_args() {
+	protected function get_child_default_args(): array {
 		return array(
 			'name'    => 'data',
 			'exclude' => array(),
@@ -105,9 +107,9 @@ class QueryGroup extends Group_Control_Base {
 	 *
 	 * @since 1.0.0
 	 * @access protected
-	 * @return array Group control fields.
+	 * @return array<string, mixed> Group control fields.
 	 */
-	protected function init_fields() {
+	protected function init_fields(): array {
 		$fields = array();
 
 		$fields['source'] = array(
@@ -141,9 +143,9 @@ class QueryGroup extends Group_Control_Base {
 	 *
 	 * @since 1.0.0
 	 * @access protected
-	 * @return array Default group control options.
+	 * @return array<string, mixed> Default group control options.
 	 */
-	protected function get_default_options() {
+	protected function get_default_options(): array {
 		return array(
 			'popover' => false,
 		);
@@ -158,9 +160,9 @@ class QueryGroup extends Group_Control_Base {
 	 *
 	 * @since 1.0.0
 	 * @access private
-	 * @return array The array of dynamic fields controls.
+	 * @return array<string, mixed> The array of dynamic fields controls.
 	 */
-	private function get_dynamic_fields_controls() {
+	private function get_dynamic_fields_controls(): array {
 		$group_name = $this->get_controls_prefix();
 		$group_name = apply_filters( 'arts/query_control/group_control/dynamic_fields_controls/group_name', $group_name, $this );
 
@@ -408,9 +410,9 @@ class QueryGroup extends Group_Control_Base {
 	 *
 	 * @since 1.0.0
 	 * @access private
-	 * @return array The array of static fields controls.
+	 * @return array<string, mixed> The array of static fields controls.
 	 */
-	private function get_static_fields_controls() {
+	private function get_static_fields_controls(): array {
 		$repeater_fields = $this->get_static_fields_repeater_controls();
 		$title_field     = array_key_exists( 'title', $repeater_fields ) ? '{{{ title }}}' : '';
 
@@ -438,9 +440,9 @@ class QueryGroup extends Group_Control_Base {
 	 *
 	 * @since 1.0.0
 	 * @access private
-	 * @return array The controls added to the repeater.
+	 * @return array<string, mixed> The controls added to the repeater.
 	 */
-	private function get_static_fields_repeater_controls() {
+	private function get_static_fields_repeater_controls(): array {
 		$repeater = new Repeater();
 
 		$fields_set = $this->get_static_fields_controls_default_set();
@@ -583,12 +585,15 @@ class QueryGroup extends Group_Control_Base {
 		 *
 		 * @since 1.0.0
 		 *
-		 * @param Repeater $repeater The Elementor repeater instance.
-		 * @param QueryGroup $this The current QueryGroup instance.
+		 * @param Repeater   $repeater The Elementor repeater instance.
+		 * @param QueryGroup $instance The current QueryGroup instance.
 		 */
 		do_action( 'arts/query_control/group_control/static_fields_controls/repeater', $repeater, $this );
 
-		return $repeater->get_controls();
+		/** @var array<string, mixed> */
+		$controls = $repeater->get_controls();
+
+		return $controls;
 	}
 
 	/**
@@ -599,9 +604,10 @@ class QueryGroup extends Group_Control_Base {
 	 *
 	 * @since 1.0.0
 	 * @access private
-	 * @return array The default set of static field controls.
+	 * @return array<string, string> The default set of static field controls.
+	 * @phpstan-return array<string, string>
 	 */
-	private function get_static_fields_controls_default_set() {
+	private function get_static_fields_controls_default_set(): array {
 		$fields_set = array(
 			'title' => esc_html__( 'Title', 'arts-query-control-for-elementor' ),
 			'link'  => esc_html__( 'Link', 'arts-query-control-for-elementor' ),
@@ -615,10 +621,11 @@ class QueryGroup extends Group_Control_Base {
 		 *
 		 * @since 1.0.0
 		 *
-		 * @param array $fields_set The default set of static field controls.
+		 * @param array<string, string> $fields_set The default set of static field controls.
 		 */
 		$fields_set = apply_filters( 'arts/query_control/group_control/static_fields_controls/default_set', $fields_set );
 
+		/** @var array<string, string> */
 		return $fields_set;
 	}
 
@@ -630,9 +637,10 @@ class QueryGroup extends Group_Control_Base {
 	 *
 	 * @since 1.0.0
 	 * @access private
-	 * @return array The default set of dynamic fields controls.
+	 * @return array<string, string> The default set of dynamic fields controls.
+	 * @phpstan-return array<string, string>
 	 */
-	private function get_dynamic_fields_controls_default_set() {
+	private function get_dynamic_fields_controls_default_set(): array {
 		$fields_set = array(
 			'post_type'       => esc_html__( 'Post Type', 'arts-query-control-for-elementor' ),
 			'posts_query'     => esc_html__( 'Query Posts', 'arts-query-control-for-elementor' ),
@@ -669,10 +677,11 @@ class QueryGroup extends Group_Control_Base {
 		 *
 		 * @since 1.0.0
 		 *
-		 * @param array $fields_set The default set of dynamic field controls.
+		 * @param array<string, string> $fields_set The default set of dynamic field controls.
 		 */
 		$fields_set = apply_filters( 'arts/query_control/group_control/dynamic_fields_controls/default_set', $fields_set );
 
+		/** @var array<string, string> */
 		return $fields_set;
 	}
 }
