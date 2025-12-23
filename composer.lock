@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0ec91b635235a78797f636c17ca14cc1",
+    "content-hash": "e925c1a5f5a9687ba274b703556db90c",
     "packages": [
         {
             "name": "arts/base",
-            "version": "v1.0.1",
+            "version": "v1.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/artkrsk/arts-base.git",
-                "reference": "73dcef147684516956ea0b15c3f80cc199cc7d02"
+                "reference": "d926ae6109f8cd60a8d2969dd048e986671102e9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/artkrsk/arts-base/zipball/73dcef147684516956ea0b15c3f80cc199cc7d02",
-                "reference": "73dcef147684516956ea0b15c3f80cc199cc7d02",
+                "url": "https://api.github.com/repos/artkrsk/arts-base/zipball/d926ae6109f8cd60a8d2969dd048e986671102e9",
+                "reference": "d926ae6109f8cd60a8d2969dd048e986671102e9",
                 "shasum": ""
             },
             "require": {
@@ -51,9 +51,9 @@
             "description": "Framework-agnostic base classes for Arts WordPress plugins",
             "support": {
                 "issues": "https://github.com/artkrsk/arts-base/issues",
-                "source": "https://github.com/artkrsk/arts-base/tree/v1.0.1"
+                "source": "https://github.com/artkrsk/arts-base/tree/v1.0.3"
             },
-            "time": "2025-12-21T19:01:40+00:00"
+            "time": "2025-12-23T01:28:43+00:00"
         },
         {
             "name": "arts/elementor-extension",
@@ -61,7 +61,7 @@
             "dist": {
                 "type": "path",
                 "url": "/Users/art/Projects/Framework/packages/ArtsElementorExtension",
-                "reference": "795a90f7c6fc871240ddd5a2b4ba94fe54ca7607"
+                "reference": "14d859c2f9d6617e0b10342df80c266e6c333ac3"
             },
             "require": {
                 "arts/base": "@dev",
@@ -132,7 +132,7 @@
             "dist": {
                 "type": "path",
                 "url": "/Users/art/Projects/Framework/packages/ArtsUtilities",
-                "reference": "fc35e6e61454bc6c05c8c13f9fea3825959904ee"
+                "reference": "de5753234bb52caceab717317f23aaa9a5127785"
             },
             "require": {
                 "php": ">=8.0"
