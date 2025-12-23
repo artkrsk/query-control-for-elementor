@@ -52,4 +52,4 @@ project.*.js export-ignore
 .vscode export-ignore
 fixtures export-ignore
 phpstan.neon export-ignore
-captainhook.json
+captainhook.json export-ignore
