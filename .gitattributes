@@ -52,3 +52,4 @@ project.*.js export-ignore
 .taskmaster export-ignore
 .vscode export-ignore
 fixtures export-ignore
+phpstan.neon export-ignore
