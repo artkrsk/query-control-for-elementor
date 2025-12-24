@@ -326,6 +326,3 @@ class Plugin extends BasePlugin {
 		return isset( $settings[ $key ] ) ? $settings[ $key ] : $default;
 	}
 }
-
-// Auto load
-Plugin::instance();
