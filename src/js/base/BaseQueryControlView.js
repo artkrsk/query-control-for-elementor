@@ -216,8 +216,9 @@ export const BaseQueryControlView = {
    * @returns {Object} Query data
    */
   getQueryData() {
+    const modelQuery = this.model.get('query')
     const autocomplete = {
-      query: Object.assign({}, this.model.get('query'))
+      query: (modelQuery && typeof modelQuery === 'object' && !Array.isArray(modelQuery)) ? Object.assign({}, modelQuery) : {}
     }
 
     const groupPostType = this.getControlValueByName('post_type')

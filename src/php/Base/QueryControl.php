@@ -200,25 +200,12 @@ abstract class QueryControl extends Control_Select2 {
 	 * @static
 	 *
 	 * @param array<string, mixed> $data The request data.
-	 * @return array<string, mixed>|\WP_Error The processed query data or error object.
-	 * @phpstan-return array<string, mixed>|\WP_Error
+	 * @return array<string, mixed> The processed query data.
+	 * @phpstan-return array<string, mixed>
 	 */
-	protected static function autocomplete_query_data( array $data ): array|\WP_Error {
-		if ( ! isset( $data['autocomplete'] ) || empty( $data['autocomplete'] ) ) {
-			return new \WP_Error( 'ArtsQueryControlAutocomplete', esc_html__( 'Empty or incomplete data', 'arts-query-control-for-elementor' ) );
-		}
-
-		$autocomplete = $data['autocomplete'];
-
-		if ( ! is_array( $autocomplete ) || ! isset( $autocomplete['query'] ) ) {
-			return new \WP_Error( 'ArtsQueryControlAutocomplete', esc_html__( 'Empty or incomplete data', 'arts-query-control-for-elementor' ) );
-		}
-
-		$query = $autocomplete['query'];
-
-		if ( ! is_array( $query ) ) {
-			$query = array();
-		}
+	protected static function autocomplete_query_data( array $data ): array {
+		$autocomplete = isset( $data['autocomplete'] ) && is_array( $data['autocomplete'] ) && ! empty( $data['autocomplete'] ) ? $data['autocomplete'] : array( 'query' => array() );
+		$query        = isset( $autocomplete['query'] ) && is_array( $autocomplete['query'] ) ? $autocomplete['query'] : array();
 
 		if ( empty( $query['post_type'] ) ) {
 			$query['post_type'] = 'any';

@@ -83,10 +83,6 @@ class QueryPostsSelect extends QueryControl {
 
 		$query_data = self::get_titles_query_data( $data );
 
-		if ( is_wp_error( $query_data ) ) {
-			return $query_data;
-		}
-
 		if ( ! isset( $query_data['query'] ) || ! is_array( $query_data['query'] ) ) {
 			return array();
 		}
@@ -133,7 +129,7 @@ class QueryPostsSelect extends QueryControl {
 
 		$query_data = self::autocomplete_query_data( $data );
 
-		if ( is_wp_error( $query_data ) || ! isset( $query_data['query'] ) || ! is_array( $query_data['query'] ) ) {
+		if ( ! isset( $query_data['query'] ) || ! is_array( $query_data['query'] ) ) {
 			return array( 'results' => array() );
 		}
 
@@ -143,11 +139,12 @@ class QueryPostsSelect extends QueryControl {
 		$post_type     = isset( $query_args['post_type'] ) && is_string( $query_args['post_type'] ) ? $query_args['post_type'] : 'post';
 		$post_type_obj = get_post_type_object( $post_type );
 
-		// Use fallback label for 'any' or invalid post types
-		$post_type_label = $post_type_obj ? $post_type_obj->labels->name : esc_html__( 'Posts', 'arts-query-control-for-elementor' );
+		if ( ! $post_type_obj ) {
+			return array( 'results' => array() );
+		}
 
 		$results = array(
-			'text'     => $post_type_label,
+			'text'     => $post_type_obj->labels->name,
 			'children' => array(),
 		);
 
@@ -185,19 +182,11 @@ class QueryPostsSelect extends QueryControl {
 	 * @static
 	 *
 	 * @param array<string, mixed> $data The request data.
-	 * @return array<string, mixed>|\WP_Error The query data or error object if invalid.
-	 * @phpstan-return array<string, mixed>|\WP_Error
+	 * @return array<string, mixed> The query data.
+	 * @phpstan-return array<string, mixed>
 	 */
-	private static function get_titles_query_data( array $data ): array|\WP_Error {
-		if ( ! isset( $data['get_titles'] ) || empty( $data['get_titles'] ) ) {
-			return new \WP_Error( 'ArtsQueryControlGetTitles', esc_html__( 'Empty or incomplete data', 'arts-query-control-for-elementor' ) );
-		}
-
-		$get_titles = $data['get_titles'];
-
-		if ( ! is_array( $get_titles ) ) {
-			return new \WP_Error( 'ArtsQueryControlGetTitles', esc_html__( 'Empty or incomplete data', 'arts-query-control-for-elementor' ) );
-		}
+	private static function get_titles_query_data( array $data ): array {
+		$get_titles = isset( $data['get_titles'] ) && is_array( $data['get_titles'] ) && ! empty( $data['get_titles'] ) ? $data['get_titles'] : array( 'query' => array() );
 
 		if ( empty( $get_titles['query'] ) ) {
 			$get_titles['query'] = array();

@@ -83,10 +83,29 @@ class QueryGroup extends Group_Control_Base {
 	}
 
 	/**
+	 * Initialize arguments and clear field cache.
+	 *
+	 * Clears the static field cache to prevent group prefix persistence when the same
+	 * singleton is used in different contexts with different names.
+	 *
+	 * @since 2.0.0
+	 * @access protected
+	 * @param mixed $args User arguments.
+	 * @return void
+	 */
+	protected function init_args( $args ): void {
+		// Clear static field cache to prevent prefix persistence
+		static::$fields = null;
+
+		$args_array = is_array( $args ) ? $args : array();
+		parent::init_args( $args_array );
+	}
+
+	/**
 	 * Get child default arguments.
 	 *
 	 * Retrieves the default arguments for all the child controls for a specific group
-	 * control.
+	 * control. Forces 'name' to 'data' to prevent prefix persistence from other contexts.
 	 *
 	 * @since 1.0.0
 	 * @access protected

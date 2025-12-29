@@ -81,19 +81,8 @@ class QueryTermsSelect extends QueryControl {
 			return new \WP_Error( 'access_denied', esc_html__( 'Access denied.', 'arts-query-control-for-elementor' ) );
 		}
 
-		if ( ! isset( $data['get_titles'] ) || empty( $data['get_titles'] ) ) {
-			return new \WP_Error( 'ArtsQueryControlGetTitles', esc_html__( 'Empty or incomplete data', 'arts-query-control-for-elementor' ) );
-		}
-
-		if ( ! is_array( $data['get_titles'] ) || ! isset( $data['get_titles']['query'] ) ) {
-			return array();
-		}
-
-		$query = $data['get_titles']['query'];
-
-		if ( ! is_array( $query ) ) {
-			$query = array();
-		}
+		$get_titles = isset( $data['get_titles'] ) && is_array( $data['get_titles'] ) && ! empty( $data['get_titles'] ) ? $data['get_titles'] : array( 'query' => array() );
+		$query      = isset( $get_titles['query'] ) && is_array( $get_titles['query'] ) ? $get_titles['query'] : array();
 
 		if ( empty( $query['post_type'] ) ) {
 			$query['post_type'] = 'any';
@@ -101,15 +90,9 @@ class QueryTermsSelect extends QueryControl {
 
 		$post_type_value = isset( $query['post_type'] ) ? $query['post_type'] : 'any';
 		$post_type       = is_string( $post_type_value ) ? $post_type_value : 'any';
+		$taxonomies      = get_object_taxonomies( $post_type, 'objects' );
 
-		// For 'any' post type, get all public taxonomies; otherwise get taxonomies for specific post type
-		if ( 'any' === $post_type ) {
-			$taxonomies = get_taxonomies( array( 'public' => true ), 'objects' );
-		} else {
-			$taxonomies = get_object_taxonomies( $post_type, 'objects' );
-		}
-
-		if ( ! is_array( $taxonomies ) ) {
+		if ( ! is_array( $taxonomies ) || empty( $taxonomies ) ) {
 			return array();
 		}
 
@@ -157,7 +140,7 @@ class QueryTermsSelect extends QueryControl {
 		$results    = array();
 		$query_data = self::autocomplete_query_data( $data );
 
-		if ( is_wp_error( $query_data ) || ! isset( $query_data['query'] ) || ! is_array( $query_data['query'] ) ) {
+		if ( ! isset( $query_data['query'] ) || ! is_array( $query_data['query'] ) ) {
 			return array( 'results' => array() );
 		}
 
@@ -178,15 +161,9 @@ class QueryTermsSelect extends QueryControl {
 
 		$post_type_value = isset( $query_data['query']['post_type'] ) ? $query_data['query']['post_type'] : 'any';
 		$post_type       = is_string( $post_type_value ) ? $post_type_value : 'any';
+		$taxonomies      = get_object_taxonomies( $post_type, 'objects' );
 
-		// For 'any' post type, get all public taxonomies; otherwise get taxonomies for specific post type
-		if ( 'any' === $post_type ) {
-			$taxonomies = get_taxonomies( array( 'public' => true ), 'objects' );
-		} else {
-			$taxonomies = get_object_taxonomies( $post_type, 'objects' );
-		}
-
-		if ( ! is_array( $taxonomies ) ) {
+		if ( ! is_array( $taxonomies ) || empty( $taxonomies ) ) {
 			return array( 'results' => array() );
 		}
 
