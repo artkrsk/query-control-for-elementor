@@ -86,7 +86,7 @@ class QueryTermsSelect extends QueryControl {
 		}
 
 		if ( ! is_array( $data['get_titles'] ) || ! isset( $data['get_titles']['query'] ) ) {
-			return new \WP_Error( 'ArtsQueryControlGetTitles', esc_html__( 'Empty or incomplete data', 'arts-query-control-for-elementor' ) );
+			return array();
 		}
 
 		$query = $data['get_titles']['query'];
@@ -101,7 +101,13 @@ class QueryTermsSelect extends QueryControl {
 
 		$post_type_value = isset( $query['post_type'] ) ? $query['post_type'] : 'any';
 		$post_type       = is_string( $post_type_value ) ? $post_type_value : 'any';
-		$taxonomies      = get_object_taxonomies( $post_type, 'objects' );
+
+		// For 'any' post type, get all public taxonomies; otherwise get taxonomies for specific post type
+		if ( 'any' === $post_type ) {
+			$taxonomies = get_taxonomies( array( 'public' => true ), 'objects' );
+		} else {
+			$taxonomies = get_object_taxonomies( $post_type, 'objects' );
+		}
 
 		if ( ! is_array( $taxonomies ) ) {
 			return array();
@@ -151,12 +157,8 @@ class QueryTermsSelect extends QueryControl {
 		$results    = array();
 		$query_data = self::autocomplete_query_data( $data );
 
-		if ( is_wp_error( $query_data ) ) {
-			return $query_data;
-		}
-
-		if ( ! isset( $query_data['query'] ) || ! is_array( $query_data['query'] ) ) {
-			return new \WP_Error( 'invalid_query', esc_html__( 'Invalid query data.', 'arts-query-control-for-elementor' ) );
+		if ( is_wp_error( $query_data ) || ! isset( $query_data['query'] ) || ! is_array( $query_data['query'] ) ) {
+			return array( 'results' => array() );
 		}
 
 		$include_taxonomies = isset( $query_data['query']['include'] ) && is_array( $query_data['query']['include'] ) ? $query_data['query']['include'] : array();
@@ -176,7 +178,13 @@ class QueryTermsSelect extends QueryControl {
 
 		$post_type_value = isset( $query_data['query']['post_type'] ) ? $query_data['query']['post_type'] : 'any';
 		$post_type       = is_string( $post_type_value ) ? $post_type_value : 'any';
-		$taxonomies      = get_object_taxonomies( $post_type, 'objects' );
+
+		// For 'any' post type, get all public taxonomies; otherwise get taxonomies for specific post type
+		if ( 'any' === $post_type ) {
+			$taxonomies = get_taxonomies( array( 'public' => true ), 'objects' );
+		} else {
+			$taxonomies = get_object_taxonomies( $post_type, 'objects' );
+		}
 
 		if ( ! is_array( $taxonomies ) ) {
 			return array( 'results' => array() );

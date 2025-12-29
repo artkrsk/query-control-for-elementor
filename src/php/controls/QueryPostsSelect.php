@@ -88,7 +88,7 @@ class QueryPostsSelect extends QueryControl {
 		}
 
 		if ( ! isset( $query_data['query'] ) || ! is_array( $query_data['query'] ) ) {
-			return new \WP_Error( 'invalid_query', esc_html__( 'Invalid query data.', 'arts-query-control-for-elementor' ) );
+			return array();
 		}
 
 		$query_args                  = $query_data['query'];
@@ -133,12 +133,8 @@ class QueryPostsSelect extends QueryControl {
 
 		$query_data = self::autocomplete_query_data( $data );
 
-		if ( is_wp_error( $query_data ) ) {
-			return $query_data;
-		}
-
-		if ( ! isset( $query_data['query'] ) || ! is_array( $query_data['query'] ) ) {
-			return new \WP_Error( 'invalid_query', esc_html__( 'Invalid query data.', 'arts-query-control-for-elementor' ) );
+		if ( is_wp_error( $query_data ) || ! isset( $query_data['query'] ) || ! is_array( $query_data['query'] ) ) {
+			return array( 'results' => array() );
 		}
 
 		$query_args                  = $query_data['query'];
@@ -147,12 +143,11 @@ class QueryPostsSelect extends QueryControl {
 		$post_type     = isset( $query_args['post_type'] ) && is_string( $query_args['post_type'] ) ? $query_args['post_type'] : 'post';
 		$post_type_obj = get_post_type_object( $post_type );
 
-		if ( ! $post_type_obj ) {
-			return new \WP_Error( 'invalid_post_type', esc_html__( 'Invalid post type.', 'arts-query-control-for-elementor' ) );
-		}
+		// Use fallback label for 'any' or invalid post types
+		$post_type_label = $post_type_obj ? $post_type_obj->labels->name : esc_html__( 'Posts', 'arts-query-control-for-elementor' );
 
 		$results = array(
-			'text'     => $post_type_obj->labels->name,
+			'text'     => $post_type_label,
 			'children' => array(),
 		);
 
