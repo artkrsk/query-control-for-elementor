@@ -6,7 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-use Arts\ElementorExtension\Plugins\BasePlugin;
+use Arts\Base\Plugins\BasePlugin;
 use Arts\Utilities\Utilities;
 
 /**

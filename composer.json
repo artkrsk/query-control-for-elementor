@@ -10,7 +10,7 @@
   ],
   "require": {
     "php": ">=8.0",
-    "arts/elementor-extension": "@dev",
+    "arts/base": "@dev",
     "arts/utilities": "@dev"
   },
   "require-dev": {
@@ -34,7 +34,7 @@
     },
     {
       "type": "path",
-      "url": "/Users/art/Projects/Framework/packages/ArtsElementorExtension",
+      "url": "/Users/art/Projects/Framework/packages/ArtsBase",
       "options": {
         "symlink": true
       }

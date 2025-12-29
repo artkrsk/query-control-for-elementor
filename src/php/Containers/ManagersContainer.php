@@ -11,16 +11,9 @@ use Arts\QueryControl\Managers\Controls;
 use Arts\QueryControl\Managers\Compatibility;
 
 /**
- * Managers Container
- *
- * Type-safe container for plugin managers.
- *
- * @since 1.0.0
- *
- * @property Controls $controls Controls manager instance.
- * @property Compatibility $compatibility Compatibility manager instance.
+ * @property Controls $controls
+ * @property Compatibility $compatibility
  */
 class ManagersContainer extends BaseManagersContainer {
-	public Controls $controls;
-	public Compatibility $compatibility;
+	// Empty - uses parent's ArrayObject storage with type safety via @property annotations
 }

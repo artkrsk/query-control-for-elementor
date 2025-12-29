@@ -6,7 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-use Arts\ElementorExtension\Plugins\BaseManager;
+use Arts\Base\Managers\BaseManager;
 use Elementor\Controls_Manager;
 use Arts\QueryControl\Controls\QueryPostTypesSelect;
 use Arts\QueryControl\Controls\QueryPostsSelect;

@@ -2,7 +2,7 @@
   "name": "@arts/query-control-for-elementor",
   "description": "A set of custom made controls for Elementor to query posts, terms and many more",
   "author": "Artem Semkin",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "type": "module",
   "license": "MIT",
   "private": true,
