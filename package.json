@@ -55,9 +55,7 @@
     "format:check": "prettier --check 'src/ts/**/*.{ts,tsx,json,css}'",
     "lint": "eslint 'src/ts/**/*.{ts,tsx}'",
     "lint:fix": "eslint --fix 'src/ts/**/*.{ts,tsx}'",
-    "test": "vitest",
-    "test:watch": "vitest watch",
-    "test:coverage": "vitest run --coverage",
-    "test:ui": "vitest --ui"
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage"
   }
 }
