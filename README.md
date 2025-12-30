@@ -2,7 +2,7 @@
 
 ![License](https://img.shields.io/badge/license-MIT-blue)
 ![WordPress](https://img.shields.io/badge/wordpress-6.0%2B-green)
-![PHP](https://img.shields.io/badge/php-7.4%2B-purple)
+![PHP](https://img.shields.io/badge/php-8.0%2B-purple)
 ![Elementor](https://img.shields.io/badge/elementor-compatible-red)
 [![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-ffdd00?style=flat&logo=buy-me-a-coffee&logoColor=black)](https://buymeacoffee.com/artemsemkin)
 
@@ -280,6 +280,23 @@ You can customize the behavior and appearance of the controls using the followin
 - `arts/query_control/post_types/include`
   - **Description:** Modifies the list of post types explicitly included in the `QueryPostTypesSelect` control (these are added in addition to those fetched by `query_args`).
   - **Parameters:** `$include_types` (array) - Array of post type slugs to include.
+
+- `arts/query_control/query_args`
+  - **Description:** Modifies the WP_Query arguments used when fetching posts via `Plugin::get_posts_query_args()` and `Plugin::get_queried_posts()`.
+  - **Parameters:** `$query_args` (array) - The query arguments array.
+  - **Example:** Add custom meta query.
+    ```php
+    add_filter( 'arts/query_control/query_args', function( $query_args ) {
+        $query_args['meta_query'] = array(
+            array(
+                'key'     => 'featured',
+                'value'   => '1',
+                'compare' => '='
+            )
+        );
+        return $query_args;
+    } );
+    ```
 
 ### Actions
 
