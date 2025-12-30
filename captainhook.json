@@ -4,6 +4,9 @@
     "actions": [
       {
         "action": "composer check"
+      },
+      {
+        "action": "pnpm test"
       }
     ]
   },
