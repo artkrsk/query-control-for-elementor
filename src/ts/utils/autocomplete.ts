@@ -53,12 +53,7 @@ export const getAutocompleteConfig = (
   action: string,
   config: IAutocompleteConfigOptions
 ): TAutocompleteConfig => {
-  const {
-    closeOnSelect = false,
-    before,
-    after,
-    queryData = { autocomplete: { query: {} } }
-  } = config
+  const { closeOnSelect = false, before, after, queryData = {} } = config
 
   return {
     ajax: {

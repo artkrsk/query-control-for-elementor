@@ -1,3 +1,8 @@
+/** Type guard for plain objects (not null, not array) */
+export const isPlainObject = (value: unknown): value is Record<string, unknown> => {
+  return value !== null && typeof value === 'object' && !Array.isArray(value)
+}
+
 /**
  * Validates that an action string is valid
  *
@@ -19,7 +24,7 @@ export const validateAction = (action: unknown): action is string => {
  * @returns True if the response is a valid options object
  */
 export const isValidResponse = (response: unknown): response is Record<string, string> => {
-  return response !== null && typeof response === 'object' && !Array.isArray(response)
+  return isPlainObject(response)
 }
 
 /**

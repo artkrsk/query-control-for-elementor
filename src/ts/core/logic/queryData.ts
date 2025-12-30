@@ -1,4 +1,5 @@
 import type { TQueryData } from '../../types'
+import { isPlainObject } from './validation'
 
 /**
  * Builds query data structure for AJAX autocomplete requests
@@ -14,8 +15,9 @@ export const buildQueryData = (
   modelQuery: Record<string, unknown> | null | undefined,
   groupPostType: string | undefined
 ): TQueryData => {
-  const query: Record<string, unknown> =
-    modelQuery && typeof modelQuery === 'object' ? { ...modelQuery } : {}
+  const query: Record<string, unknown> = isPlainObject(modelQuery)
+    ? { ...modelQuery }
+    : {}
 
   if (groupPostType) {
     query['post_type'] = groupPostType
@@ -46,8 +48,8 @@ export const getQueryFromModel = (
 
   const query = model.get('query')
 
-  if (query && typeof query === 'object') {
-    return query as Record<string, unknown>
+  if (isPlainObject(query)) {
+    return query
   }
 
   return null
