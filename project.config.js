@@ -5,7 +5,7 @@
 export default {
   // Basic project information
   name: 'Arts Query Control for Elementor',
-  entry: './src/js/index.js',
+  entry: './src/ts/index.ts',
   author: 'Artem Semkin',
   license: 'MIT',
   description: 'Query Control for Elementor',
