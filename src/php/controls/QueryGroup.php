@@ -195,6 +195,11 @@ class QueryGroup extends Group_Control_Base {
 			'default' => $is_archive ? 'yes' : '',
 		);
 
+		$fields['respect_archive_pagination'] = array(
+			'type'    => Controls_Manager::HIDDEN,
+			'default' => 'yes',
+		);
+
 		if ( array_key_exists( 'post_type', $fields_set ) ) {
 			$fields['post_type'] = array(
 				'label'       => $fields_set['post_type'],
@@ -366,23 +371,44 @@ class QueryGroup extends Group_Control_Base {
 
 		if ( array_key_exists( 'posts_amount', $fields_set ) ) {
 			$fields['posts_amount'] = array(
-				'label'     => $fields_set['posts_amount'],
-				'type'      => Controls_Manager::SLIDER,
-				'range'     => array(
+				'label'      => $fields_set['posts_amount'],
+				'type'       => Controls_Manager::SLIDER,
+				'range'      => array(
 					'number' => array(
 						'min'  => 0,
 						'max'  => 16,
 						'step' => 1,
 					),
 				),
-				'default'   => array(
+				'default'    => array(
 					'unit' => 'number',
 					'size' => 0,
 				),
-				'group'     => $group_name,
-				'condition' => array(
-					'source'     => 'dynamic',
-					'is_archive' => '',
+				'group'      => $group_name,
+				'conditions' => array(
+					'relation' => 'and',
+					'terms'    => array(
+						array(
+							'name'     => 'source',
+							'operator' => '===',
+							'value'    => 'dynamic',
+						),
+						array(
+							'relation' => 'or',
+							'terms'    => array(
+								array(
+									'name'     => 'is_archive',
+									'operator' => '===',
+									'value'    => '',
+								),
+								array(
+									'name'     => 'respect_archive_pagination',
+									'operator' => 'in',
+									'value'    => array( 'no', '' ),
+								),
+							),
+						),
+					),
 				),
 			);
 		}
