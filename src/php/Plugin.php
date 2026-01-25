@@ -216,7 +216,12 @@ class Plugin extends BasePlugin {
 		$exclude_ids                = self::get_setting( $settings, $data_control_prefix . 'exclude_ids', array() );
 		$order_by                   = self::get_setting( $settings, $data_control_prefix . 'order_by', '' );
 		$order                      = self::get_setting( $settings, $data_control_prefix . 'order', '' );
-		$respect_archive_pagination = self::get_setting( $settings, $data_control_prefix . 'respect_archive_pagination', 'yes' );
+		$respect_archive_pagination = self::get_setting( $settings, $data_control_prefix . 'respect_archive_pagination', null );
+
+		// Treat null (missing key) as 'yes' for backwards compatibility with widgets created before this feature
+		if ( $respect_archive_pagination === null ) {
+			$respect_archive_pagination = 'yes';
+		}
 
 		$query_args = array(
 			'post_type'     => $post_type,
@@ -246,7 +251,11 @@ class Plugin extends BasePlugin {
 			$query_args['posts_per_page'] = -1;
 		}
 
-		if ( ( ! $is_archive || in_array( $respect_archive_pagination, array( 'no', '' ), true ) ) && is_array( $posts_amount ) && isset( $posts_amount['size'] ) && $posts_amount['size'] > 0 ) {
+		$is_pagination_opted_out = in_array( $respect_archive_pagination, array( 'no', '' ), true );
+		$should_use_custom_limit = ! $is_archive || $is_pagination_opted_out;
+		$has_valid_posts_amount  = is_array( $posts_amount ) && isset( $posts_amount['size'] ) && $posts_amount['size'] > 0;
+
+		if ( $should_use_custom_limit && $has_valid_posts_amount ) {
 			$query_args['posts_per_page'] = $posts_amount['size'];
 		}
 
