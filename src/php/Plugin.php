@@ -207,15 +207,16 @@ class Plugin extends BasePlugin {
 	public static function get_posts_query_args( array $settings = array(), string $data_control_prefix = '' ): array {
 		$is_archive = Utilities::is_archive();
 
-		$post_type     = self::get_setting( $settings, $data_control_prefix . 'post_type', '' );
-		$posts_amount  = self::get_setting( $settings, $data_control_prefix . 'posts_amount', array() );
-		$posts_query   = self::get_setting( $settings, $data_control_prefix . 'posts_query', '' );
-		$include_terms = self::get_setting( $settings, $data_control_prefix . 'include_terms', array() );
-		$exclude_terms = self::get_setting( $settings, $data_control_prefix . 'exclude_terms', array() );
-		$include_ids   = self::get_setting( $settings, $data_control_prefix . 'include_ids', array() );
-		$exclude_ids   = self::get_setting( $settings, $data_control_prefix . 'exclude_ids', array() );
-		$order_by      = self::get_setting( $settings, $data_control_prefix . 'order_by', '' );
-		$order         = self::get_setting( $settings, $data_control_prefix . 'order', '' );
+		$post_type                  = self::get_setting( $settings, $data_control_prefix . 'post_type', '' );
+		$posts_amount               = self::get_setting( $settings, $data_control_prefix . 'posts_amount', array() );
+		$posts_query                = self::get_setting( $settings, $data_control_prefix . 'posts_query', '' );
+		$include_terms              = self::get_setting( $settings, $data_control_prefix . 'include_terms', array() );
+		$exclude_terms              = self::get_setting( $settings, $data_control_prefix . 'exclude_terms', array() );
+		$include_ids                = self::get_setting( $settings, $data_control_prefix . 'include_ids', array() );
+		$exclude_ids                = self::get_setting( $settings, $data_control_prefix . 'exclude_ids', array() );
+		$order_by                   = self::get_setting( $settings, $data_control_prefix . 'order_by', '' );
+		$order                      = self::get_setting( $settings, $data_control_prefix . 'order', '' );
+		$respect_archive_pagination = self::get_setting( $settings, $data_control_prefix . 'respect_archive_pagination', 'yes' );
 
 		$query_args = array(
 			'post_type'     => $post_type,
@@ -225,7 +226,7 @@ class Plugin extends BasePlugin {
 			'order'         => $order,
 		);
 
-		if ( $is_archive ) {
+		if ( $is_archive && $respect_archive_pagination === 'yes' ) {
 			$sync_global_query_vars = array(
 				'paged',
 				'cat',
@@ -245,7 +246,7 @@ class Plugin extends BasePlugin {
 			$query_args['posts_per_page'] = -1;
 		}
 
-		if ( ! $is_archive && is_array( $posts_amount ) && isset( $posts_amount['size'] ) && $posts_amount['size'] > 0 ) {
+		if ( ( ! $is_archive || in_array( $respect_archive_pagination, array( 'no', '' ), true ) ) && is_array( $posts_amount ) && isset( $posts_amount['size'] ) && $posts_amount['size'] > 0 ) {
 			$query_args['posts_per_page'] = $posts_amount['size'];
 		}
 
