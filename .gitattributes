@@ -53,3 +53,4 @@ project.*.js export-ignore
 fixtures export-ignore
 phpstan.neon export-ignore
 captainhook.json export-ignore
+/*.ts export-ignore
