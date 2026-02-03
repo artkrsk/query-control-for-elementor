@@ -226,7 +226,6 @@ class Plugin extends BasePlugin {
 		$query_args = array(
 			'post_type'     => $post_type,
 			'no_found_rows' => true,
-			'lang'          => '',
 			'orderby'       => $order_by,
 			'order'         => $order,
 		);
