@@ -83,7 +83,7 @@
             "dist": {
                 "type": "path",
                 "url": "/Users/art/Projects/Framework/packages/ArtsUtilities",
-                "reference": "c2e112a0a164f04e64d5b2f0763f76c5a753b8b9"
+                "reference": "19d72cd3e079bf44a7aa5d37580df266a3894b1d"
             },
             "require": {
                 "php": ">=8.0"
@@ -151,7 +151,7 @@
             "dist": {
                 "type": "path",
                 "url": "/Users/art/Projects/Framework/packages/elementor-stubs",
-                "reference": "15cf2d29da87736634ae5410b2087f5d1df7f4e2"
+                "reference": "aae62a2dbe918a89c3c11862e6fc57de31e6dc83"
             },
             "require": {
                 "php": ">=8.0",
@@ -1503,11 +1503,11 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "2.1.37",
+            "version": "2.1.38",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/28cd424c5ea984128c95cfa7ea658808e8954e49",
-                "reference": "28cd424c5ea984128c95cfa7ea658808e8954e49",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/dfaf1f530e1663aa167bc3e52197adb221582629",
+                "reference": "dfaf1f530e1663aa167bc3e52197adb221582629",
                 "shasum": ""
             },
             "require": {
@@ -1552,7 +1552,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-01-24T08:21:55+00:00"
+            "time": "2026-01-30T17:12:46+00:00"
         },
         {
             "name": "psr/container",
