@@ -2,7 +2,7 @@
   "name": "@arts/query-control-for-elementor",
   "description": "A set of custom made controls for Elementor to query posts, terms and many more",
   "author": "Artem Semkin",
-  "version": "3.2.0",
+  "version": "3.2.1",
   "type": "module",
   "license": "MIT",
   "private": true,
@@ -20,7 +20,10 @@
     "overrides": {
       "vite": ">=7.3.0",
       "js-yaml": ">=4.1.1",
-      "brace-expansion": ">=2.0.2"
+      "lodash": ">=4.17.23",
+      "qs": ">=6.14.2",
+      "systeminformation": ">=5.31.0",
+      "swiper": ">=12.1.2"
     }
   },
   "dependencies": {
@@ -30,20 +33,21 @@
     "@eslint/js": "^9.39.2",
     "@types/jquery": "^3.5.33",
     "@types/jqueryui": "^1.12.24",
-    "@types/node": "^25.0.10",
+    "@types/node": "^25.3.0",
     "@vitest/coverage-v8": "^4.0.18",
     "@vitest/ui": "4.0.18",
-    "cypress": "^15.9.0",
+    "cypress": "^15.10.0",
+    "swiper": "^12.1.2",
     "depcheck": "^1.4.7",
     "eslint": "^9.39.2",
     "eslint-config-prettier": "^10.1.8",
-    "globals": "^17.1.0",
-    "jsdom": "^27.4.0",
-    "npm-check-updates": "^19.3.1",
+    "globals": "^17.3.0",
+    "jsdom": "^28.1.0",
+    "npm-check-updates": "^19.4.1",
     "prettier": "^3.8.1",
     "ts-loader": "^9.5.4",
     "typescript": "^5.9.3",
-    "typescript-eslint": "^8.53.1",
+    "typescript-eslint": "^8.56.0",
     "vitest": "^4.0.18"
   },
   "scripts": {
