@@ -12,7 +12,7 @@
             "dist": {
                 "type": "path",
                 "url": "/Users/art/Projects/Framework/packages/ArtsBase",
-                "reference": "43319de94976039f2b95f5caabb23f1a3a39e93a"
+                "reference": "dcd32b4ff54471d7bd8ce5e9f512f62f30674c25"
             },
             "require": {
                 "php": ">=8.0"
@@ -83,7 +83,7 @@
             "dist": {
                 "type": "path",
                 "url": "/Users/art/Projects/Framework/packages/ArtsUtilities",
-                "reference": "31c9554868fd2ab1a992ef3e2ce3eea690544559"
+                "reference": "d98c91cb9e4afe7efc2ae528fdf68104de834c25"
             },
             "require": {
                 "php": ">=8.0"
@@ -153,7 +153,7 @@
             "dist": {
                 "type": "path",
                 "url": "/Users/art/Projects/Framework/packages/elementor-stubs",
-                "reference": "ab7d5a7be823bce3dcbb82b70737bbf29063232c"
+                "reference": "8cad311b0bafa6fe6b39f35f62aa310c0bb4fccf"
             },
             "require": {
                 "php": ">=8.0",
