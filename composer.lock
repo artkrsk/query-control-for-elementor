@@ -12,7 +12,7 @@
             "dist": {
                 "type": "path",
                 "url": "/Users/art/Projects/Framework/packages/ArtsBase",
-                "reference": "31b1d2df692c29fcf4eb5947102eb5619d186762"
+                "reference": "43319de94976039f2b95f5caabb23f1a3a39e93a"
             },
             "require": {
                 "php": ">=8.0"
@@ -83,7 +83,7 @@
             "dist": {
                 "type": "path",
                 "url": "/Users/art/Projects/Framework/packages/ArtsUtilities",
-                "reference": "f32510677c0bd300c27b19936176a4d17ba8d17e"
+                "reference": "31c9554868fd2ab1a992ef3e2ce3eea690544559"
             },
             "require": {
                 "php": ">=8.0"
@@ -93,6 +93,8 @@
                 "dealerdirect/phpcodesniffer-composer-installer": "^1.0",
                 "ergebnis/composer-normalize": "^2.48",
                 "php-stubs/acf-pro-stubs": "^6.5",
+                "php-stubs/woocommerce-stubs": "^10.5",
+                "php-stubs/wp-cli-stubs": "^2.12",
                 "phpstan/phpstan": "^2.0",
                 "squizlabs/php_codesniffer": "^3.13.4",
                 "szepeviktor/phpstan-wordpress": "^2.0",
@@ -151,10 +153,11 @@
             "dist": {
                 "type": "path",
                 "url": "/Users/art/Projects/Framework/packages/elementor-stubs",
-                "reference": "a4029ffa845b0fbf4664d5402ac1539bd91168a8"
+                "reference": "ab7d5a7be823bce3dcbb82b70737bbf29063232c"
             },
             "require": {
                 "php": ">=8.0",
+                "php-stubs/woocommerce-stubs": "^10.4",
                 "php-stubs/wordpress-stubs": "^6.9",
                 "php-stubs/wp-cli-stubs": "^2.12"
             },
@@ -162,7 +165,6 @@
                 "captainhook/captainhook": "^5.27",
                 "ergebnis/composer-normalize": "^2.48",
                 "php-stubs/generator": "^0.8",
-                "php-stubs/woocommerce-stubs": "10.4.2",
                 "phpstan/phpstan": "^2.0",
                 "phpunit/phpunit": "^9.5",
                 "squizlabs/php_codesniffer": "^3.0",
@@ -234,16 +236,16 @@
         },
         {
             "name": "captainhook/captainhook",
-            "version": "5.28.3",
+            "version": "5.28.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/captainhook-git/captainhook.git",
-                "reference": "5d35b249f3843ef36ead119f4347e649278ad6d8"
+                "reference": "2a7316bf4ba4c3b11b3544c063788622d3520ee1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/captainhook-git/captainhook/zipball/5d35b249f3843ef36ead119f4347e649278ad6d8",
-                "reference": "5d35b249f3843ef36ead119f4347e649278ad6d8",
+                "url": "https://api.github.com/repos/captainhook-git/captainhook/zipball/2a7316bf4ba4c3b11b3544c063788622d3520ee1",
+                "reference": "2a7316bf4ba4c3b11b3544c063788622d3520ee1",
                 "shasum": ""
             },
             "require": {
@@ -306,7 +308,7 @@
             ],
             "support": {
                 "issues": "https://github.com/captainhook-git/captainhook/issues",
-                "source": "https://github.com/captainhook-git/captainhook/tree/5.28.3"
+                "source": "https://github.com/captainhook-git/captainhook/tree/5.28.5"
             },
             "funding": [
                 {
@@ -314,7 +316,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-02-16T14:08:58+00:00"
+            "time": "2026-02-28T08:59:22+00:00"
         },
         {
             "name": "captainhook/secrets",
@@ -1186,6 +1188,50 @@
                 "source": "https://github.com/php-stubs/acf-pro-stubs/tree/v6.5.0"
             },
             "time": "2025-09-05T00:47:01+00:00"
+        },
+        {
+            "name": "php-stubs/woocommerce-stubs",
+            "version": "v10.5.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-stubs/woocommerce-stubs.git",
+                "reference": "4b01d69e3bd0e22e125973e3049b1cd7249a86f3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-stubs/woocommerce-stubs/zipball/4b01d69e3bd0e22e125973e3049b1cd7249a86f3",
+                "reference": "4b01d69e3bd0e22e125973e3049b1cd7249a86f3",
+                "shasum": ""
+            },
+            "require": {
+                "php-stubs/wordpress-stubs": "^5.3 || ^6.0"
+            },
+            "require-dev": {
+                "php": "~7.1 || ~8.0",
+                "php-stubs/generator": "^0.8.0"
+            },
+            "suggest": {
+                "symfony/polyfill-php73": "Symfony polyfill backporting some PHP 7.3+ features to lower PHP versions",
+                "szepeviktor/phpstan-wordpress": "WordPress extensions for PHPStan"
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "WooCommerce function and class declaration stubs for static analysis.",
+            "homepage": "https://github.com/php-stubs/woocommerce-stubs",
+            "keywords": [
+                "PHPStan",
+                "static analysis",
+                "woocommerce",
+                "wordpress"
+            ],
+            "support": {
+                "issues": "https://github.com/php-stubs/woocommerce-stubs/issues",
+                "source": "https://github.com/php-stubs/woocommerce-stubs/tree/v10.5.2"
+            },
+            "time": "2026-02-16T20:45:34+00:00"
         },
         {
             "name": "php-stubs/wordpress-stubs",
