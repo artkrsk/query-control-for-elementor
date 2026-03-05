@@ -153,11 +153,10 @@
             "dist": {
                 "type": "path",
                 "url": "/Users/art/Projects/Framework/packages/elementor-stubs",
-                "reference": "8cad311b0bafa6fe6b39f35f62aa310c0bb4fccf"
+                "reference": "26cd66e02c77a525e3035318d87de5452529c36f"
             },
             "require": {
                 "php": ">=8.0",
-                "php-stubs/woocommerce-stubs": "^10.4",
                 "php-stubs/wordpress-stubs": "^6.9",
                 "php-stubs/wp-cli-stubs": "^2.12"
             },
@@ -165,6 +164,7 @@
                 "captainhook/captainhook": "^5.27",
                 "ergebnis/composer-normalize": "^2.48",
                 "php-stubs/generator": "^0.8",
+                "php-stubs/woocommerce-stubs": "10.5.2",
                 "phpstan/phpstan": "^2.0",
                 "phpunit/phpunit": "^9.5",
                 "squizlabs/php_codesniffer": "^3.0",
@@ -1188,50 +1188,6 @@
                 "source": "https://github.com/php-stubs/acf-pro-stubs/tree/v6.5.0"
             },
             "time": "2025-09-05T00:47:01+00:00"
-        },
-        {
-            "name": "php-stubs/woocommerce-stubs",
-            "version": "v10.5.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/php-stubs/woocommerce-stubs.git",
-                "reference": "4b01d69e3bd0e22e125973e3049b1cd7249a86f3"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/php-stubs/woocommerce-stubs/zipball/4b01d69e3bd0e22e125973e3049b1cd7249a86f3",
-                "reference": "4b01d69e3bd0e22e125973e3049b1cd7249a86f3",
-                "shasum": ""
-            },
-            "require": {
-                "php-stubs/wordpress-stubs": "^5.3 || ^6.0"
-            },
-            "require-dev": {
-                "php": "~7.1 || ~8.0",
-                "php-stubs/generator": "^0.8.0"
-            },
-            "suggest": {
-                "symfony/polyfill-php73": "Symfony polyfill backporting some PHP 7.3+ features to lower PHP versions",
-                "szepeviktor/phpstan-wordpress": "WordPress extensions for PHPStan"
-            },
-            "type": "library",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "WooCommerce function and class declaration stubs for static analysis.",
-            "homepage": "https://github.com/php-stubs/woocommerce-stubs",
-            "keywords": [
-                "PHPStan",
-                "static analysis",
-                "woocommerce",
-                "wordpress"
-            ],
-            "support": {
-                "issues": "https://github.com/php-stubs/woocommerce-stubs/issues",
-                "source": "https://github.com/php-stubs/woocommerce-stubs/tree/v10.5.2"
-            },
-            "time": "2026-02-16T20:45:34+00:00"
         },
         {
             "name": "php-stubs/wordpress-stubs",
