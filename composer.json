@@ -14,7 +14,7 @@
     "arts/utilities": "@dev"
   },
   "require-dev": {
-    "arts/elementor-stubs": "@dev",
+    "arts/elementor-stubs": "^4.2",
     "captainhook/captainhook": "^5.27",
     "dealerdirect/phpcodesniffer-composer-installer": "^1.0",
     "ergebnis/composer-normalize": "^2.48",
@@ -35,13 +35,6 @@
     {
       "type": "path",
       "url": "/Users/art/Projects/Framework/packages/ArtsBase",
-      "options": {
-        "symlink": true
-      }
-    },
-    {
-      "type": "path",
-      "url": "/Users/art/Projects/Framework/packages/elementor-stubs",
       "options": {
         "symlink": true
       }

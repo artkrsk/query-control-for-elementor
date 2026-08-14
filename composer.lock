@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "da574371153d54a7105922dbc69f6e5a",
+    "content-hash": "e2f68d98f8a2558a8aad74957280248c",
     "packages": [
         {
             "name": "arts/base",
@@ -12,7 +12,7 @@
             "dist": {
                 "type": "path",
                 "url": "/Users/art/Projects/Framework/packages/ArtsBase",
-                "reference": "dcd32b4ff54471d7bd8ce5e9f512f62f30674c25"
+                "reference": "6749b9df1da013612bf1e97d99f3bcec8aa1526a"
             },
             "require": {
                 "php": ">=8.0"
@@ -83,7 +83,7 @@
             "dist": {
                 "type": "path",
                 "url": "/Users/art/Projects/Framework/packages/ArtsUtilities",
-                "reference": "fac1765e376b50251c05787b4a4dfff74ca4b7c4"
+                "reference": "88db6037910a951ab37b3468654f89e79b248134"
             },
             "require": {
                 "php": ">=8.0"
@@ -149,11 +149,17 @@
     "packages-dev": [
         {
             "name": "arts/elementor-stubs",
-            "version": "dev-master",
+            "version": "v4.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/artkrsk/elementor-stubs.git",
+                "reference": "4d4860e49b7827940bc2ae308645dc21ff48c2e8"
+            },
             "dist": {
-                "type": "path",
-                "url": "/Users/art/Projects/Framework/packages/elementor-stubs",
-                "reference": "b0b8942f0464de7b757f29161c3db17b229bdd2c"
+                "type": "zip",
+                "url": "https://api.github.com/repos/artkrsk/elementor-stubs/zipball/4d4860e49b7827940bc2ae308645dc21ff48c2e8",
+                "reference": "4d4860e49b7827940bc2ae308645dc21ff48c2e8",
+                "shasum": ""
             },
             "require": {
                 "php": ">=8.0",
@@ -164,7 +170,7 @@
             "require-dev": {
                 "captainhook/captainhook": "^5.27",
                 "ergebnis/composer-normalize": "^2.48",
-                "php-stubs/generator": "^0.8",
+                "php-stubs/generator": "^0.8 || ^0.9",
                 "phpstan/phpstan": "^2.0",
                 "phpunit/phpunit": "^9.5",
                 "squizlabs/php_codesniffer": "^3.0",
@@ -172,40 +178,7 @@
                 "wp-coding-standards/wpcs": "^3.0"
             },
             "type": "library",
-            "scripts": {
-                "post-install-cmd": [
-                    "vendor/bin/captainhook install -f -s"
-                ],
-                "post-update-cmd": [
-                    "vendor/bin/captainhook install -f -s"
-                ],
-                "changelog": [
-                    "git-cliff --output CHANGELOG.md"
-                ],
-                "generate": [
-                    "php generate.php"
-                ],
-                "normalize": [
-                    "composer-normalize"
-                ],
-                "test": [
-                    "@test:phpunit",
-                    "@test:phpstan",
-                    "@test:cs"
-                ],
-                "test:cs": [
-                    "phpcs"
-                ],
-                "test:cs:fix": [
-                    "phpcbf"
-                ],
-                "test:phpstan": [
-                    "phpstan analyze -c tests/phpstan.neon --memory-limit=2G"
-                ],
-                "test:phpunit": [
-                    "phpunit"
-                ]
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "GPL-3.0-or-later"
             ],
@@ -217,22 +190,29 @@
             ],
             "description": "Comprehensive PHPStan stubs for Elementor and Elementor Pro WordPress page builder - auto-generated, self-contained, plug & play",
             "keywords": [
+                "PHPStan",
                 "elementor",
                 "elementor-pro",
                 "ide-autocomplete",
                 "intellisense",
                 "page-builder",
-                "phpstan",
                 "static-analysis",
                 "stubs",
                 "type-definitions",
                 "type-safety",
                 "wordpress"
             ],
-            "transport-options": {
-                "symlink": true,
-                "relative": false
-            }
+            "support": {
+                "issues": "https://github.com/artkrsk/elementor-stubs/issues",
+                "source": "https://github.com/artkrsk/elementor-stubs/tree/v4.2.1"
+            },
+            "funding": [
+                {
+                    "url": "https://www.buymeacoffee.com/artemsemkin",
+                    "type": "buy_me_a_coffee"
+                }
+            ],
+            "time": "2026-08-01T13:49:57+00:00"
         },
         {
             "name": "captainhook/captainhook",
@@ -2803,7 +2783,6 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "arts/base": 20,
-        "arts/elementor-stubs": 20,
         "arts/utilities": 20
     },
     "prefer-stable": false,
