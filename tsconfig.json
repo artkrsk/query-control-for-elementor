@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
+    "rootDir": "./src/ts",
     "outDir": "./dist",
     "declarationDir": "./dist",
     "strict": true,
@@ -22,8 +22,7 @@
     "target": "ES2022",
     "jsx": "react",
     "allowJs": true,
-    "moduleResolution": "node",
-    "downlevelIteration": true,
+    "moduleResolution": "bundler",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "allowUmdGlobalAccess": true,

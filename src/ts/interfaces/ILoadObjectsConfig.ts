@@ -13,7 +13,4 @@ export interface ILoadObjectsConfig {
 
   /** Callback on success */
   onSuccess?: (response: Record<string, string>) => Promise<void> | void
-
-  /** Callback on error */
-  onError?: (error: unknown) => Promise<void> | void
 }

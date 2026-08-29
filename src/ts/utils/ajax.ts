@@ -1,4 +1,4 @@
-import type { ILoadObjectsConfig, IFetchConfig, IElementorLoadObjectsConfig } from '../interfaces'
+import type { ILoadObjectsConfig, IFetchConfig } from '../interfaces'
 import type { TSelectOptions } from '../types'
 
 /**
@@ -16,36 +16,29 @@ export const loadObjectsElementor = (
   config: ILoadObjectsConfig = {}
 ): Promise<TSelectOptions> => {
   return new Promise((resolve, reject) => {
-    const { ids = [], data = {}, before, onSuccess, onError } = config
+    const { ids = [], data = {}, before, onSuccess } = config
 
     if (!action) {
       reject(new Error('Action is required'))
       return
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const ajax = (window.elementorCommon as any)?.ajax as
-      | {
-          loadObjects: (config: IElementorLoadObjectsConfig) => void
-        }
-      | undefined
+    if (!window.elementorCommon) {
+      reject(new Error('Elementor Common is not available'))
+      return
+    }
 
-    ajax?.loadObjects({
+    /** Elementor's loadObjects has no error callback to wire onError into. */
+    window.elementorCommon.ajax.loadObjects({
       action,
       ids,
       data,
       before,
-      success: async (response: TSelectOptions) => {
+      success: async (response) => {
         if (typeof onSuccess === 'function') {
-          await onSuccess(response)
+          await onSuccess(response as TSelectOptions)
         }
-        resolve(response)
-      },
-      error: async (error: unknown) => {
-        if (typeof onError === 'function') {
-          await onError(error)
-        }
-        reject(error)
+        resolve(response as TSelectOptions)
       }
     })
   })

@@ -1,7 +1,6 @@
 export * from './IQueryControlContext'
 export * from './ILoadObjectsConfig'
 export * from './IFetchConfig'
-export * from './IElementorLoadObjectsConfig'
 export * from './ITransportConfig'
 export * from './IAutocompleteConfigOptions'
 export * from './ISortableElements'

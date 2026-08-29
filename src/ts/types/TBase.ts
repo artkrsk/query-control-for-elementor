@@ -1,4 +1,4 @@
-import type { Editor } from '@arts/elementor-types'
+import type { Editor } from '@artemsemkin/elementor-types'
 
 /**
  * Base type alias for Elementor Select2 control view

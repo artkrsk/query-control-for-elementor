@@ -1,9 +1,9 @@
-import type { ElementorMain, ElementorModules, ElementorCommon, $e } from '@arts/elementor-types'
+import type { ElementorEditor, ElementorModules, ElementorCommon, $e } from '@artemsemkin/elementor-types'
 
 declare global {
   interface Window {
     $e?: $e
-    elementor?: ElementorMain
+    elementor?: ElementorEditor
     elementorCommon?: ElementorCommon
     elementorModules?: ElementorModules
   }
