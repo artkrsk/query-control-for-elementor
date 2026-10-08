@@ -44,8 +44,8 @@ pnpm run deps:update              # Update all dependencies
 ```
 
 ### Important Notes
-- The `pnpm run dev` command runs continuously in the background with live reload enabled
-- DO NOT run `pnpm run build` or `pnpm run dev` manually unless explicitly needed - dev is already running
+- The `pnpm run dev` command watches files with live reload enabled.
+- Run dev/build when needed after checking process commands, working directories, and shared output paths. Reuse suitable tasks; coordinate targeted restarts and avoid concurrent writers. Preserve explicit requests to keep a server stopped.
 - PHP code follows WordPress Coding Standards with some exclusions (see phpcs.xml)
 - PHPStan is configured at maximum level with strict type checking
 
