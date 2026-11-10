@@ -24,7 +24,7 @@ export default function (baseConfig) {
   config.liveReload.reloadOnRestart = true
 
   config.wordpress.targets = [
-    '/Users/art/Projects/Themes/Trigger/DEV/src/wp/plugin/vendor/arts/query-control-for-elementor/src/php'
+    '/Users/art/Projects/Themes/Trigger/DEV/wp/plugin/vendor/arts/query-control-for-elementor/src/php'
   ]
 
   // Configure WordPress plugin target
