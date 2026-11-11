@@ -90,8 +90,12 @@ class Plugin extends BasePlugin {
 	 * @return void
 	 */
 	protected function add_actions(): void {
-		// Register query controls
-		add_action( 'elementor/controls/register', array( $this->managers->controls, 'register_controls' ) );
+		// Register query controls. Elementor Pro 4.4.0 fires the action on `init` before the run action, so register at once when it has already fired
+		if ( did_action( 'elementor/controls/register' ) ) {
+			$this->managers->controls->register_controls( \Elementor\Plugin::$instance->controls_manager );
+		} else {
+			add_action( 'elementor/controls/register', array( $this->managers->controls, 'register_controls' ) );
+		}
 
 		// Register AJAX actions for the query controls
 		add_action( 'elementor/ajax/register_actions', array( $this->managers->controls, 'register_ajax_actions' ) );
