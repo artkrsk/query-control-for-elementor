@@ -70,9 +70,6 @@ next-env.d.ts
 *.tmp
 *.temp
 
-# WordPress specific
-/src/php/libraries/*
-
 # Project specific
 /drafts
 .claude

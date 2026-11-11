@@ -23,9 +23,8 @@ composer update                   # Update PHP dependencies
 
 ### TypeScript/Frontend Development
 ```bash
-# Development
-pnpm run dev                      # Start development build with watch mode (runs continuously in background)
-pnpm run build                    # Build for production
+# Build
+pnpm run build                    # Build the editor bundle and its stylesheet
 
 # Code Quality
 pnpm run lint                     # Run ESLint
@@ -44,8 +43,8 @@ pnpm run deps:update              # Update all dependencies
 ```
 
 ### Important Notes
-- The `pnpm run dev` command watches files with live reload enabled.
-- Run dev/build when needed after checking process commands, working directories, and shared output paths. Reuse suitable tasks; coordinate targeted restarts and avoid concurrent writers. Preserve explicit requests to keep a server stopped.
+- There is no watch mode: run `pnpm run build` after a change in `src/ts` or `src/styles`.
+- The package is public, and a release is a git tag `vX.Y.Z` that Packagist serves. The built files in `src/php/libraries` are therefore tracked: build and commit them before tagging.
 - PHP code follows WordPress Coding Standards with some exclusions (see phpcs.xml)
 - PHPStan is configured at maximum level with strict type checking
 
@@ -129,22 +128,19 @@ export const registerQueryPostsSelect = (): boolean => {
 
 ### Build System
 
-Uses custom build system from `__build__` submodule (part of Arts Framework):
-- Build configuration: `project.config.js` (main), `project.development.js`, `project.production.js`
-- Builds JavaScript to UMD format: `src/php/libraries/arts-query-control-for-elementor/index.umd.js`
-- Compiles SASS to CSS: `src/php/libraries/arts-query-control-for-elementor/index.css`
-- Includes BrowserSync live reload with HTTPS support
-- Supports WordPress sync for hot reloading in development
+`scripts/build.mjs` is the whole build:
+- esbuild bundles `src/ts/index.ts` into `src/php/libraries/arts-query-control-for-elementor/index.umd.js` (a plain script despite the name; it sets no global, and `console` calls are dropped)
+- Sass compiles `src/styles/index.sass` to `src/php/libraries/arts-query-control-for-elementor/index.css`
 
 ### Dependencies
 
 **PHP Dependencies:**
-- Requires: `arts/base`, `arts/utilities` (local Framework packages)
+- Requires: `arts/base` `^1.1`, `arts/utilities` `^2.7` (both from Packagist)
 - Dev: PHPStan, PHP_CodeSniffer (WPCS), CaptainHook, Elementor stubs
 
 **TypeScript Dependencies:**
-- Runtime: `@arts/elementor-types` (local Framework package)
-- Dev: ESLint, Prettier, TypeScript, Vitest
+- Types only: `@artemsemkin/elementor-types` (`file:../elementor-types`)
+- Dev: esbuild, Sass, ESLint, Prettier, TypeScript, Vitest
 
 **Important:** This package is part of the Arts Framework monorepo structure at `/Users/art/Projects/Framework/packages/`
 

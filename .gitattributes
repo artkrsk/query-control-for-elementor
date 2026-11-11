@@ -54,4 +54,5 @@ README.md export-ignore
 fixtures export-ignore
 phpstan.neon export-ignore
 captainhook.json export-ignore
+composer.lock export-ignore
 /*.ts export-ignore

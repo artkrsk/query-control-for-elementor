@@ -4,15 +4,21 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e2f68d98f8a2558a8aad74957280248c",
+    "content-hash": "a6c467cf3c50d2b713f2f1797ad5cba0",
     "packages": [
         {
             "name": "arts/base",
-            "version": "dev-main",
+            "version": "v1.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/artkrsk/arts-base.git",
+                "reference": "f30e6ee4d986819bf92a7fd0e0773178825fa9fa"
+            },
             "dist": {
-                "type": "path",
-                "url": "/Users/art/Projects/Framework/packages/ArtsBase",
-                "reference": "6749b9df1da013612bf1e97d99f3bcec8aa1526a"
+                "type": "zip",
+                "url": "https://api.github.com/repos/artkrsk/arts-base/zipball/f30e6ee4d986819bf92a7fd0e0773178825fa9fa",
+                "reference": "f30e6ee4d986819bf92a7fd0e0773178825fa9fa",
+                "shasum": ""
             },
             "require": {
                 "php": ">=8.0"
@@ -32,36 +38,7 @@
                     "Arts\\Base\\": "src/php/"
                 }
             },
-            "scripts": {
-                "post-install-cmd": [
-                    "vendor/bin/captainhook install -f -s"
-                ],
-                "post-update-cmd": [
-                    "vendor/bin/captainhook install -f -s"
-                ],
-                "check": [
-                    "@phpcs",
-                    "@phpstan"
-                ],
-                "fix": [
-                    "@phpcbf"
-                ],
-                "normalize": [
-                    "composer-normalize"
-                ],
-                "phpcbf": [
-                    "phpcbf --standard=phpcs.xml"
-                ],
-                "phpcs": [
-                    "phpcs --standard=phpcs.xml"
-                ],
-                "phpstan": [
-                    "phpstan analyse --memory-limit=1G"
-                ],
-                "phpstan:baseline": [
-                    "phpstan analyse --memory-limit=1G --generate-baseline"
-                ]
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "GPL-3.0-or-later"
             ],
@@ -72,24 +49,31 @@
                 }
             ],
             "description": "Framework-agnostic base classes for Arts WordPress plugins",
-            "transport-options": {
-                "symlink": true,
-                "relative": false
-            }
+            "support": {
+                "issues": "https://github.com/artkrsk/arts-base/issues",
+                "source": "https://github.com/artkrsk/arts-base/tree/v1.1.2"
+            },
+            "time": "2026-09-24T18:40:08+00:00"
         },
         {
             "name": "arts/utilities",
-            "version": "dev-master",
+            "version": "v2.7.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/artkrsk/arts-utilities.git",
+                "reference": "40481af8701a666a9d4dbf54a8b717adba19f82d"
+            },
             "dist": {
-                "type": "path",
-                "url": "/Users/art/Projects/Framework/packages/ArtsUtilities",
-                "reference": "88db6037910a951ab37b3468654f89e79b248134"
+                "type": "zip",
+                "url": "https://api.github.com/repos/artkrsk/arts-utilities/zipball/40481af8701a666a9d4dbf54a8b717adba19f82d",
+                "reference": "40481af8701a666a9d4dbf54a8b717adba19f82d",
+                "shasum": ""
             },
             "require": {
                 "php": ">=8.0"
             },
             "require-dev": {
-                "arts/elementor-stubs": "@dev",
+                "arts/elementor-stubs": "^4.2",
                 "dealerdirect/phpcodesniffer-composer-installer": "^1.0",
                 "ergebnis/composer-normalize": "^2.48",
                 "php-stubs/acf-pro-stubs": "^6.5",
@@ -106,30 +90,7 @@
                     "Arts\\Utilities\\": "src/php/"
                 }
             },
-            "scripts": {
-                "check": [
-                    "@phpcs",
-                    "@phpstan"
-                ],
-                "fix": [
-                    "@phpcbf"
-                ],
-                "normalize": [
-                    "composer-normalize"
-                ],
-                "phpcbf": [
-                    "phpcbf --standard=phpcs.xml"
-                ],
-                "phpcs": [
-                    "phpcs --standard=phpcs.xml"
-                ],
-                "phpstan": [
-                    "phpstan analyse --memory-limit=2G"
-                ],
-                "phpstan:baseline": [
-                    "phpstan analyse --memory-limit=1G --generate-baseline"
-                ]
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "GPL-3.0-or-later"
             ],
@@ -140,10 +101,11 @@
                 }
             ],
             "description": "A comprehensive collection of utility methods for WordPress theme and plugin development, with a focus on Elementor integration.",
-            "transport-options": {
-                "symlink": true,
-                "relative": false
-            }
+            "support": {
+                "issues": "https://github.com/artkrsk/arts-utilities/issues",
+                "source": "https://github.com/artkrsk/arts-utilities/tree/v2.7.0"
+            },
+            "time": "2026-10-08T09:35:19+00:00"
         }
     ],
     "packages-dev": [
@@ -2781,15 +2743,12 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "arts/base": 20,
-        "arts/utilities": 20
-    },
+    "stability-flags": {},
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
         "php": ">=8.0"
     },
     "platform-dev": {},
-    "plugin-api-version": "2.6.0"
+    "plugin-api-version": "2.9.0"
 }

@@ -10,8 +10,8 @@
   ],
   "require": {
     "php": ">=8.0",
-    "arts/base": "@dev",
-    "arts/utilities": "@dev"
+    "arts/base": "^1.1",
+    "arts/utilities": "^2.7"
   },
   "require-dev": {
     "arts/elementor-stubs": "^4.2",
@@ -24,22 +24,6 @@
     "szepeviktor/phpstan-wordpress": "^2.0",
     "wp-coding-standards/wpcs": "^3.0"
   },
-  "repositories": [
-    {
-      "type": "path",
-      "url": "/Users/art/Projects/Framework/packages/ArtsUtilities",
-      "options": {
-        "symlink": true
-      }
-    },
-    {
-      "type": "path",
-      "url": "/Users/art/Projects/Framework/packages/ArtsBase",
-      "options": {
-        "symlink": true
-      }
-    }
-  ],
   "autoload": {
     "psr-4": {
       "Arts\\QueryControl\\": "src/php/"

@@ -1,3 +1,0 @@
-[submodule "__build__"]
-	path = __build__
-	url = git@github.com:artkrsk/arts-public-builder.git

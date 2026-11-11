@@ -1,5 +1,6 @@
 allowBuilds:
-  cypress: true
+  esbuild: true
+  '@parcel/watcher': false
 overrides:
   brace-expansion@>=2.0.0 <3.0.0: 2.1.0
   flatted: 3.4.2
@@ -16,9 +17,6 @@ overrides:
   serialize-javascript: 7.0.5
   swiper: '>=12.1.2'
   systeminformation: '>=5.31.0'
-  # ts-loader 9.6.x breaks the webpack UMD build (fails on the `import './global.d.ts'` entry
-  # with "TypeScript emitted no output") — pin until fixed upstream, not a security override.
-  ts-loader: 9.5.7
   undici: ^7.24.0
   uuid: '>=14.0.0'
   vite: '>=7.3.2'
