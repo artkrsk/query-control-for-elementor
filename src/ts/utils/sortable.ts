@@ -122,7 +122,7 @@ export const attachSortable = ($el: JQuery): boolean => {
 
   ;($list as JQuery & { sortable: (options: Record<string, unknown>) => void }).sortable({
     containment: 'parent',
-    stop: function (_event: unknown, ui: { item: JQuery }) {
+    stop(_event: unknown, ui: { item: JQuery }) {
       syncSelectWithSortableList($select, ui.item)
     }
   })

@@ -36,17 +36,17 @@ export const buildQueryData = (
  * Safely gets the query configuration from a model's attributes,
  * returning null if not available.
  *
- * @param model - Backbone model with get method
+ * @param controlModel - Backbone model with get method
  * @returns Query object or null
  */
 export const getQueryFromModel = (
-  model: { get: (key: string) => unknown } | null | undefined
+  controlModel: { get: (key: string) => unknown } | null | undefined
 ): Record<string, unknown> | null => {
-  if (!model || typeof model.get !== 'function') {
+  if (!controlModel || typeof controlModel.get !== 'function') {
     return null
   }
 
-  const query = model.get('query')
+  const query = controlModel.get('query')
 
   if (isPlainObject(query)) {
     return query
