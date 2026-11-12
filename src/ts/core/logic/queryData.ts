@@ -15,9 +15,7 @@ export const buildQueryData = (
   modelQuery: Record<string, unknown> | null | undefined,
   groupPostType: string | undefined
 ): TQueryData => {
-  const query: Record<string, unknown> = isPlainObject(modelQuery)
-    ? { ...modelQuery }
-    : {}
+  const query: Record<string, unknown> = isPlainObject(modelQuery) ? { ...modelQuery } : {}
 
   if (groupPostType) {
     query['post_type'] = groupPostType
