@@ -1,6 +1,7 @@
 import eslint from '@eslint/js'
 import prettier from 'eslint-config-prettier'
 import globals from 'globals'
+import tseslint from 'typescript-eslint'
 
 // Common globals for Elementor environment
 const elementorGlobals = {
@@ -14,6 +15,7 @@ const elementorGlobals = {
 
 export default [
   eslint.configs.recommended,
+  ...tseslint.configs.recommended,
   prettier,
   {
     ignores: [
@@ -50,7 +52,7 @@ export default [
   },
   // Configuration for source files
   {
-    files: ['src/js/**/*.js'],
+    files: ['src/ts/**/*.ts'],
     languageOptions: {
       ecmaVersion: 2022,
       sourceType: 'module',
@@ -62,7 +64,8 @@ export default [
     },
     rules: {
       'no-console': 'warn',
-      'no-unused-vars': [
+      'no-unused-vars': 'off',
+      '@typescript-eslint/no-unused-vars': [
         'warn',
         {
           argsIgnorePattern: '^_',
@@ -74,9 +77,11 @@ export default [
       'prefer-const': 'error',
       'prefer-arrow-callback': 'error',
       'object-shorthand': 'error',
-      'no-undef': 'error',
-      'no-redeclare': 'error',
-      'no-shadow': [
+      'no-undef': 'off',
+      'no-redeclare': 'off',
+      '@typescript-eslint/no-redeclare': 'error',
+      'no-shadow': 'off',
+      '@typescript-eslint/no-shadow': [
         'error',
         {
           builtinGlobals: true,
@@ -84,7 +89,8 @@ export default [
           allow: ['_', 'name']
         }
       ],
-      'no-use-before-define': [
+      'no-use-before-define': 'off',
+      '@typescript-eslint/no-use-before-define': [
         'error',
         {
           functions: false,
