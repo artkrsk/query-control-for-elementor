@@ -15,7 +15,7 @@
   },
   "require-dev": {
     "arts/elementor-stubs": "^4.2",
-    "captainhook/captainhook": "^5.27",
+    "captainhook/captainhook": "^5.29.3",
     "dealerdirect/phpcodesniffer-composer-installer": "^1.0",
     "php-stubs/acf-pro-stubs": "^6.5",
     "phpstan/phpstan": "^2.0",
@@ -37,10 +37,10 @@
   },
   "scripts": {
     "post-install-cmd": [
-      "vendor/bin/captainhook install -f -s"
+      "vendor/bin/captainhook install -f"
     ],
     "post-update-cmd": [
-      "vendor/bin/captainhook install -f -s"
+      "vendor/bin/captainhook install -f"
     ],
     "check": [
       "@phpcs",
