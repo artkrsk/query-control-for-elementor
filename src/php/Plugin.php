@@ -137,6 +137,9 @@ class Plugin extends BasePlugin {
 		// Execute the query with the modified arguments
 		$loop = new \WP_Query( $query_args );
 
+		// get_the_post_thumbnail_url() primes nothing: load every thumbnail's post and meta in two queries
+		update_post_thumbnail_cache( $loop );
+
 		if ( $loop->have_posts() ) {
 			// Handle both string and array post_type values from WP_Query
 			$post_type_value = 'post';
